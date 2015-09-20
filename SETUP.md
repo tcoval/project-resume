@@ -8,6 +8,7 @@ Install Node.js by running the following commands:
   `sudo apt-get install --yes nodejs`
 
 Install all node modules
- `npm install`
+
+  `npm install`
 
 All done!
