@@ -1,8 +1,8 @@
 # Setup
 Installation [Linux]
 
-+ Install Node.js
-+> this
+Install Node.js
+> this
 + Install mocha (testing framework)
 + Install mongoose (mongodb simplified interface)
 + Install jade (templating system)
