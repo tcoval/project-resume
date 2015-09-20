@@ -1,11 +1,13 @@
 # Setup
-Installation [Linux]
+### Linux
 
-Install Node.js
-> this
-+ Install mocha (testing framework)
-+ Install mongoose (mongodb simplified interface)
-+ Install jade (templating system)
-+ Install socket.io (socket-based network framework)
-+ Install angular.js (frontend logic)
-+ more to come...
+Install Node.js by running the following commands:
+
+  `curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -`
+ 
+  `sudo apt-get install --yes nodejs`
+
+Install all node modules
+ `npm install`
+
+All done!
