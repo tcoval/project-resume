@@ -4,6 +4,8 @@
   "description": "Project Resume is a web app that simplifies the online experience of building a resume. Focusing on visual, click-and-drag editing, its goal is to give as much control to the consumer as possible and do so in an intuitive fashion.",
   "main": "index.js",
   "scripts": {
+    "start": "mongod --dbpath util/database --port 12345 --fork --logpath util/logs/mongodb.log; node server.js",
+    "stop": "mongod --dbpath util/database --port 12345 --shutdown",
     "test": "make test"
   },
   "repository": {
@@ -11,12 +13,24 @@
     "url": "git+https://github.com/tcoval/project-resume.git"
   },
   "keywords": [
-    "npm"
+    "resume"
   ],
   "author": "Andy Bangs & Tanner Coval <tannercoval@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tcoval/project-resume/issues"
   },
-  "homepage": "https://github.com/tcoval/project-resume#readme"
+  "homepage": "https://github.com/tcoval/project-resume#readme",
+  "dependencies": {
+    "body-parser": "^1.14.0",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "mocha": "^2.3.2",
+    "mongoose": "^4.1.7",
+    "morgan": "^1.6.1",
+    "serve-favicon": "^2.3.0",
+    "serve-static": "^1.10.0",
+    "should": "^7.1.0",
+    "socket.io": "^1.3.6"
+  }
 }

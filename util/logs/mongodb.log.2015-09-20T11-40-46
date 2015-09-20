@@ -1,0 +1,38 @@
+2015-09-20T04:40:32.744-0700 I JOURNAL  [initandlisten] journal dir=/home/tcoval/Projects/project-resume/util/database/journal
+2015-09-20T04:40:32.744-0700 I JOURNAL  [initandlisten] recover : no journal files present, no recovery needed
+2015-09-20T04:40:32.969-0700 I JOURNAL  [initandlisten] preallocateIsFaster=true 2.8
+2015-09-20T04:40:33.116-0700 I JOURNAL  [durability] Durability thread started
+2015-09-20T04:40:33.117-0700 I JOURNAL  [journal writer] Journal writer thread started
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] MongoDB starting : pid=16514 port=12345 dbpath=/home/tcoval/Projects/project-resume/util/database 64-bit host=tcoval-VirtualBox
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] 
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] 
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is 'always'.
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] 
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] db version v3.0.6
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] git version: 1ef45a23a4c5e3480ac919b28afcba3c615488f2
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] build info: Linux ip-10-184-200-117 3.13.0-24-generic #46-Ubuntu SMP Thu Apr 10 19:11:08 UTC 2014 x86_64 BOOST_LIB_VERSION=1_49
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] allocator: tcmalloc
+2015-09-20T04:40:33.120-0700 I CONTROL  [initandlisten] options: { net: { port: 12345 }, processManagement: { fork: true }, storage: { dbPath: "util/database" }, systemLog: { destination: "file", path: "util/logs/mongodb.log" } }
+2015-09-20T04:40:33.123-0700 I NETWORK  [initandlisten] waiting for connections on port 12345
+2015-09-20T04:42:50.313-0700 I CONTROL  [signalProcessingThread] got signal 15 (Terminated), will terminate after current cmd ends
+2015-09-20T04:42:50.314-0700 I CONTROL  [signalProcessingThread] now exiting
+2015-09-20T04:42:50.314-0700 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+2015-09-20T04:42:50.314-0700 I NETWORK  [signalProcessingThread] closing listening socket: 6
+2015-09-20T04:42:50.314-0700 I NETWORK  [signalProcessingThread] closing listening socket: 7
+2015-09-20T04:42:50.314-0700 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-12345.sock
+2015-09-20T04:42:50.314-0700 I NETWORK  [signalProcessingThread] shutdown: going to flush diaglog...
+2015-09-20T04:42:50.314-0700 I NETWORK  [signalProcessingThread] shutdown: going to close sockets...
+2015-09-20T04:42:50.314-0700 I STORAGE  [signalProcessingThread] shutdown: waiting for fs preallocator...
+2015-09-20T04:42:50.314-0700 I STORAGE  [signalProcessingThread] shutdown: final commit...
+2015-09-20T04:42:50.316-0700 I JOURNAL  [signalProcessingThread] journalCleanup...
+2015-09-20T04:42:50.316-0700 I JOURNAL  [signalProcessingThread] removeJournalFiles
+2015-09-20T04:42:50.319-0700 I JOURNAL  [signalProcessingThread] Terminating durability thread ...
+2015-09-20T04:42:50.417-0700 I JOURNAL  [journal writer] Journal writer thread stopped
+2015-09-20T04:42:50.417-0700 I JOURNAL  [durability] Durability thread stopped
+2015-09-20T04:42:50.417-0700 I STORAGE  [signalProcessingThread] shutdown: closing all files...
+2015-09-20T04:42:50.417-0700 I STORAGE  [signalProcessingThread] closeAllFiles() finished
+2015-09-20T04:42:50.417-0700 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+2015-09-20T04:42:50.417-0700 I CONTROL  [signalProcessingThread] dbexit:  rc: 0
