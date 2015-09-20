@@ -9,8 +9,8 @@ var io = require('socket.io');
 var app = express();
 require('./routes')(app)
 
-app.set('view options', { layout: false });
-app.set('views', './views')
+app.set('view engine', 'jade')
+app.set('views', __dirname + '/views')
 app.use(serveStatic('public', {'index': ['frame.html']}))
 
 app.listen(8080);
