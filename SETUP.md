@@ -1,6 +1,6 @@
 # Setup
 Installation [Linux]
 
-Step 1:
-  This thing
-  Another thing
++ Step 1
+This thing
+Another thing
