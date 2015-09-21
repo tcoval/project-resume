@@ -1,6 +1,6 @@
 module.exports = function(app) {
     app.get('/', function(req, res) {
-        res.render('hello-world');
+        res.render('frame');
     });
 
     app.get('/layout', function(req, res) {
