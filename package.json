@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "mongod --dbpath util/database --port 12345 --fork --logpath util/logs/mongodb.log; node server.js",
-    "stop": "mongod --dbpath util/database --port 12345 --shutdown",
+    "stop": "mongod --dbpath util/database --shutdown",
     "test": "make test"
   },
   "repository": {
