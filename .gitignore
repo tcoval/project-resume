@@ -1,6 +1,6 @@
 node_modules
 npm-debug.log
 util/database/*?.*
-util/database/jornal
-util/database/_temp
+util/database/journal
+util/database/_tmp
 util/logs/*?.*
