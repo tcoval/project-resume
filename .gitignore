@@ -1,4 +1,5 @@
-node-modules
+node_modules
+npm-debug.log
 util/database/*?.*
 util/database/jornal
 util/database/_temp
