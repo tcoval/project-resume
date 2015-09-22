@@ -17,6 +17,8 @@
     .controller('appCtrl', function ($element, $http) {
       var vm = this;
 
+      vm.socket = io();
+
       vm.init = function() {
         renderLayout($http);
       }
