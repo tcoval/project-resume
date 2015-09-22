@@ -1,19 +1,24 @@
 (function() {
   'use strict';
 
+  function renderLayout($http, id) {
+    id = id || 'default';
+    var container = $('div.margins');
+    $http.get('/template?id=' + id).
+      then(function(response) {
+        container.html(response.data);
+      }, function(response) {
+        container.html(response.data);
+      });
+  }
+
   angular
     .module('app', [])
-    .controller('appCtrl', function ($http) {
+    .controller('appCtrl', function ($element, $http) {
       var vm = this;
 
-
       vm.init = function() {
-        $http.get('/layout?layout=1').
-          then(function(response) {
-            console.log($rootElement);// response.data
-          }, function(response) {
-            console.log(response);
-          });
+        renderLayout($http);
       }
     });
 })();

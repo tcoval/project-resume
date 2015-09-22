@@ -1,4 +1,5 @@
 var express = require('express'),
+    config = require('./config.json'),
     stylus = require('stylus'),
     nib = require('nib'),
     bodyParser = require('body-parser'),
@@ -17,7 +18,7 @@ function stylusCompile(str, path) {
     .use(nib());
 }
 
-require('./routes')(app);
+require('./routes')(app, config);
 
 
 app.set('views', __dirname + '/views');
