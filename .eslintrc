@@ -4,4 +4,4 @@ plugins:
 rules:
   angular/controller-name:
     - 2
-    - '/[A-Z].*Ctrl$/'
+    - '/[a-z].*Ctrl$/'

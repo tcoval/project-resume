@@ -1,26 +1,35 @@
 (function() {
   'use strict';
 
-  function renderLayout($http, id) {
-    id = id || 'default';
-    var container = $('div.margins');
-    $http.get('/template?id=' + id).
-      then(function(response) {
-        container.html(response.data);
-      }, function(response) {
-        container.html(response.data);
-      });
-  }
-
   angular
     .module('app', [])
-    .controller('appCtrl', function ($element, $http) {
+    .controller('appCtrl', function (layout) {
       var vm = this;
 
-      vm.socket = io();
+      // vm.socket = io();
 
-      vm.init = function() {
-        renderLayout($http);
+      vm.renderLayout = function () {
+        var container = angular.element('div.margins');
+
+        layout.getTemplate()
+          .then(function (data) {
+            container.html(data);
+          });
       }
+    })
+    .factory('layout', function ($http, $log) {
+      return {
+        getTemplate: function (id) {
+          var id = id || 'default';
+
+          return $http.get('/template?id=' + id)
+            .then(function (response) {
+              return response.data;
+            })
+            .catch(function () {
+              $log.error('XHR Failed for getTemplate');
+            });
+        }
+      };
     });
 })();
