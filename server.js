@@ -16,7 +16,7 @@ var express = require('express'),
 mongoose.connect(config.mongoURI);
 
 require('./routes')(app, mongoose, Resume, config);
-require('./sockets')(io, config);
+require('./sockets')(io, Resume, config);
 
 app.use(morgan('combined'));
 

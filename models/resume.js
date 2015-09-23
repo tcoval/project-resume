@@ -84,4 +84,3 @@ module.exports = function(mongoose) {
 
   return mongoose.model('Resume', ResumeSchema);
 }
-

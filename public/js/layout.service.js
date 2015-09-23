@@ -5,9 +5,6 @@
     .module('app')
     .factory('layoutService', function ($http, $log) {
 
-      // TODO remove this (hotfix for testing user Authentication)
-      $http.defaults.headers.common.authToken = '5601ec288624b693c901ca6b'
-      
       return {
         getTemplate: function (id) {
           var id = id || 'default';
