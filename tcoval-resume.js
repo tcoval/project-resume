@@ -77,22 +77,22 @@ var tcoval = new Resume(
         "experience": "(3 years)"
       },
       {
-        "skill": "Python",
-        "experience": "(2 years)"
+        "skill": "Machine Learning"
       },
       {
         "skill": "HTML, CSS, PHP, SQL",
         "experience": "(1 year)"
       },
       {
-        "skill": "Ruby, R, Scala, Javascript",
-        "experience": "(<1 year)"
+        "skill": "Python",
+        "experience": "(2 years)"
       },
       {
         "skill": "Linux"
       },
       {
-        "skill": "Machine Learning"
+        "skill": "Ruby, R, Scala, Javascript",
+        "experience": "(<1 year)"
       }
     ],
     "projects": [
@@ -115,12 +115,12 @@ var tcoval = new Resume(
     ],
     "leadership": [
       {
-        "organization": "Varsity Soccer and Football",
+        "name": "Varsity Soccer and Football",
         "dateRange": "Sept. 2011",
         "role": "Team Captain (2 years)"
       },
       {
-        "organization": "Boy Scouts of America",
+        "name": "Boy Scouts of America",
         "location": "Troop #358",
         "dateRange": "Feb. 2005 - Jan. 2012",
         "role": "Eagle Scout",
@@ -148,4 +148,6 @@ tcoval.validate(function(err) {
   });
 });
 
-process.exit();
+//Resume.find().where('baseInfo.name').equals('Tanner S. Coval').remove().exec();
+
+//process.exit();

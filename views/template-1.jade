@@ -1,113 +1,73 @@
 link(rel='stylesheet' type='text/css' href='style/template-1.css')
 .header
   .section-title(style='display:none') Header
-  .name(contentEditable='true' ng-blur='vm.emit($event)') Tanner S. Coval
+  .name(contentEditable='true' ng-blur='vm.emit($event)') #{baseInfo.name}
   .row
-    .middle-third(contentEditable='true' ng-blur='vm.emit($event)') 2107 NE 54th St.
+    .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{baseInfo.address.street}
   .row
-    .left-third(contentEditable='true' ng-blur='vm.emit($event)') (360) 608-9198
-    .right-third(contentEditable='true' ng-blur='vm.emit($event)') tannercoval@gmail.com
-    .middle-third(contentEditable='true' ng-blur='vm.emit($event)') Seattle, WA 98105
+    .left-third(contentEditable='true' ng-blur='vm.emit($event)') #{baseInfo.phone}
+    .right-third(contentEditable='true' ng-blur='vm.emit($event)') #{baseInfo.email}
+    .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{baseInfo.address.cityZip}
 .education
   .section-title Education
-  .entry
-    .row
-      .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') University of Washington
-      .right-third(contentEditable='true' ng-blur='vm.emit($event)') Graduate 2016
-      .middle-third(contentEditable='true' ng-blur='vm.emit($event)') Seattle, WA
-    .subtitle(contentEditable='true' ng-blur='vm.emit($event)') Major - Computer Science
-    .subtitle(contentEditable='true' ng-blur='vm.emit($event)') GPA - 3.71
-  .entry
-    .row
-      .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') King's Way Christian HS
-      .right-third(contentEditable='true' ng-blur='vm.emit($event)') Graduated 2012
-      .middle-third(contentEditable='true' ng-blur='vm.emit($event)') Vancouver, WA
-      .subtitle(contentEditable='true' ng-blur='vm.emit($event)') GPA - 3.86
+  each edu, i in education
+    .entry
+      .row
+        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') #{edu.name}
+        .right-third(contentEditable='true' ng-blur='vm.emit($event)') #{edu.dateRange}
+        .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{edu.location}
+      unless !edu.major
+        .subtitle(contentEditable='true' ng-blur='vm.emit($event)') #{edu.major}
+      unless !edu.gpa
+      .subtitle(contentEditable='true' ng-blur='vm.emit($event)') #{edu.gpa}
 .employment
   .section-title Employment
-  .entry
-    .row
-      .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') WhitePages
-      .right-third(contentEditable='true' ng-blur='vm.emit($event)') June 2014 - Present
-      .middle-third(contentEditable='true' ng-blur='vm.emit($event)') Seattle, WA
-      .subtitle(contentEditable='true' ng-blur='vm.emit($event)') Software Engineering Intern - Data Team
+  each employ, i in employment
+    .entry
+      .row
+        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') #{employ.name}
+        .right-third(contentEditable='true' ng-blur='vm.emit($event)') #{employ.dateRange}
+        .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{employ.location}
+      .subtitle(contentEditable='true' ng-blur='vm.emit($event)') #{employ.position}
       ul.bullets
-        li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Designed and implemented a supervised machine learning model used for classification.
-        li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Project provided groundwork for large improvements in company wide data accuracy.
-        li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Theory used includes: logistic regression, decision trees, confusion matrix, lasso feature selection, and various sampling techniques.
-  .entry
-    .row
-      .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') University of Washington
-      .right-third(contentEditable='true' ng-blur='vm.emit($event)') Sept. 2013 - Dec. 2013
-      .middle-third(contentEditable='true' ng-blur='vm.emit($event)') Seattle, WA
-    .subtitle(contentEditable='true' ng-blur='vm.emit($event)') CSE Undergraduate Teaching Assistant
-    ul.bullets
-      li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Lead quiz sections of 20+ students, attended lectures, and graded assignments / tests.
-  .entry
-    .row
-      .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') Porch
-      .right-third(contentEditable='true' ng-blur='vm.emit($event)') June 2013 - Aug. 2013
-      .middle-third(contentEditable='true' ng-blur='vm.emit($event)') Seattle, WA
-    .subtitle(contentEditable='true' ng-blur='vm.emit($event)') Software Engineering Intern
-    ul.bullets
-      li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Developed a multithreaded program to automate SEO related tasks specific to social media.
-  .entry
-    .row
-      .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') Hewlett-Packard
-      .right-third(contentEditable='true' ng-blur='vm.emit($event)') June 2011 - Aug. 2011
-      .middle-third(contentEditable='true' ng-blur='vm.emit($event)') Vancouver, WA
-    .subtitle(contentEditable='true' ng-blur='vm.emit($event)') Software Engineering Intern
-    ul.bullets
-      li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Imaging and Printing Group (R&amp;D)
-      li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Created a tool for internal use, which connected with numerous printers on a network in order to analyze the printer's settings and internal files.
+        each note, i in employ.notes
+          li.bullet(contentEditable='true' ng-blur='vm.emit($event)') #{note}
 .skills
   .section-title Skills
   .entry
-    .row
-      .left-third.center
-        span.bold(contentEditable='true' ng-blur='vm.emit($event)') Java (3 years)
-      .right-third.center
-        span.bold(contentEditable='true' ng-blur='vm.emit($event)') Linux
-      .middle-third.center
-        span.bold(contentEditable='true' ng-blur='vm.emit($event)') HTML, CSS, PHP, SQL (1 year)
-    .row
-      .left-third.center
-        span.bold(contentEditable='true' ng-blur='vm.emit($event)') Python (2 years)
-      .right-third.center
-        span.bold(contentEditable='true' ng-blur='vm.emit($event)') Machine Learning
-      .middle-third.center
-        span.bold(contentEditable='true' ng-blur='vm.emit($event)') Ruby, R, Scala, Javascript (&lt;1 year)
+    each skill, i in skills
+      case i % 3
+        when 0
+          .row
+            .left-third.center
+              span.bold(contentEditable='true' ng-blur='vm.emit($event)') #{skill.skill} #{skill.experience}
+        when 1
+            .right-third.center
+              span.bold(contentEditable='true' ng-blur='vm.emit($event)') #{skill.skill} #{skill.experience}
+        when 2
+            .middle-third.center
+              span.bold(contentEditable='true' ng-blur='vm.emit($event)') #{skill.skill} #{skill.experience}
 .projects
   .section-title Projects
-  .entry
-    .row
-      .left-half.title(contentEditable='true' ng-blur='vm.emit($event)') HUSKY RESUME
-      .right-half(contentEditable='true' ng-blur='vm.emit($event)') July 2013 - Nov. 2013
-    ul.bullets
-      li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Designed a website to generate pdf resumes for students on campus
-  .entry
-    .row
-      .left-third.title
-        span.italics(contentEditable='true' ng-blur='vm.emit($event)') FIRST Robotics Team
-      .right-third(contentEditable='true' ng-blur='vm.emit($event)') Jan. 2011 - Mar. 2011
-      .middle-third(contentEditable='true' ng-blur='vm.emit($event)') Vancouver, WA
-    .subtitle(contentEditable='true' ng-blur='vm.emit($event)') Project Leader
-    ul.bullets
-      li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Coordinated a 6 week build season for a robotics competition
-      li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Robotics programmer, assisted with mechanical development and design
+  each proj, i in projects
+    .entry
+      .row
+        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') #{proj.name}
+        .right-third(contentEditable='true' ng-blur='vm.emit($event)') #{proj.dateRange}
+        .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{proj.location}
+      .subtitle(contentEditable='true' ng-blur='vm.emit($event)') #{proj.role}
+      ul.bullets
+        each note, i in proj.notes
+          li.bullet(contentEditable='true' ng-blur='vm.emit($event)') #{note}
 .leadership
   .section-title Leadership
-  .entry
-    .row
-      .left-half.title(contentEditable='true' ng-blur='vm.emit($event)') Varsity Soccer and Football
-      .right-half(contentEditable='true' ng-blur='vm.emit($event)') Sept. 2011
-    .subtitle(contentEditable='true' ng-blur='vm.emit($event)') Team Captain (2 years)
-  .entry
-    .row
-      .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') Boy Scouts of America
-      .right-third(contentEditable='true' ng-blur='vm.emit($event)') Feb. 2005 - Jan. 2012
-      .middle-third(contentEditable='true' ng-blur='vm.emit($event)') Troop #358
-    .subtitle(contentEditable='true' ng-blur='vm.emit($event)') Eagle Scout
-    ul.bullets
-      li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Served as Senior Patrol Leader for multiple, six month rotations
-      li.bullet(contentEditable='true' ng-blur='vm.emit($event)') Member of the Order of the Arrow - Honor Society
+  each leader, i in leadership
+    .entry
+      .row
+        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') #{leader.name}
+        .right-third(contentEditable='true' ng-blur='vm.emit($event)') #{leader.dateRange}
+        .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{leader.location}
+      .subtitle(contentEditable='true' ng-blur='vm.emit($event)') #{leader.role}
+      ul.bullets
+        each note, i in leader.notes
+          li.bullet(contentEditable='true' ng-blur='vm.emit($event)') #{note}

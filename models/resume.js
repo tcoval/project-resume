@@ -46,7 +46,7 @@ module.exports = function(mongoose) {
     ],
     leadership: [
       {
-        organization: String,
+        name: String,
         location: String,
         dateRange: String,
         role: String,
@@ -55,7 +55,7 @@ module.exports = function(mongoose) {
     ],
     volunteering: [
       {
-        organization: String,
+        name: String,
         location: String,
         dateRange: String,
         role: String,
@@ -64,7 +64,7 @@ module.exports = function(mongoose) {
     ],
     honors: [
       {
-        organization: String,
+        name: String,
         location: String,
         dateRange: String,
         role: String,
@@ -73,7 +73,7 @@ module.exports = function(mongoose) {
     ],
     extraCurrActivities: [
       {
-        organization: String,
+        name: String,
         location: String,
         dateRange: String,
         role: String,

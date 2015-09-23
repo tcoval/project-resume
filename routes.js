@@ -10,15 +10,15 @@ module.exports = function(app, mongoose, Resume, config) {
   });
 
   app.get('/template', function(req, res) {
-    Resume.findOne().where('baseInfo.name').equals('Tanner S. Coval').exec(function(err, resume) {
+    Resume.findById(req.headers['auth-token'], function(err, resume) {
       if(err) {
         res.status(404).render('error');
         return
       }
-
       var template = getTemplate(req.query.templateID, config.defaultTemplate);
       res.render(template, resume, function(err, html) {
         if(err) {
+          console.log(err);
           res.status(404).render('error');
         } else {
           res.send(html);
