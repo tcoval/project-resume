@@ -3,10 +3,14 @@
 
   angular
     .module('app', [])
-    .controller('appCtrl', function (layout) {
+    .controller('appCtrl', function ($scope, $compile, layout) {
       var vm = this;
+      // var socket = io();
 
-      // vm.socket = io();
+      vm.emit = function ($event) {
+        // socket.emit('update', $event.currentTarget.innerHTML);
+        console.log($event.currentTarget.innerHTML);
+      }
 
       vm.renderLayout = function () {
         var container = angular.element('div.margins');
@@ -14,6 +18,7 @@
         layout.getTemplate()
           .then(function (data) {
             container.html(data);
+            $compile(container.contents())($scope);
           });
       }
     })
