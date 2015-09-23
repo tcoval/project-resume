@@ -1,4 +1,5 @@
 {
   "defaultTemplate": 1,
-  "sessionSecret": "project-resume-secret"
+  "sessionSecret": "project-resume-secret",
+  "mongoURI": "mongodb://localhost/testDB"
 }

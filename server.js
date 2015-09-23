@@ -9,7 +9,16 @@ var express = require('express'),
     favicon = require('serve-favicon'),
     app = express(),
     server = require('http').Server(app),
-    io = require('socket.io')(server);
+    io = require('socket.io')(server),
+    Resume = require('./models/resume')(mongoose);
+    //resumeFormat = require('./models/resumeFormat')(mongoose);
+
+mongoose.connect(config.mongoURI);
+
+require('./routes')(app, mongoose, Resume, config);
+require('./sockets')(io, config);
+
+app.use(morgan('combined'));
 
 // Automated stylus compiling
 function stylusCompile(str, path) {
@@ -17,12 +26,6 @@ function stylusCompile(str, path) {
     .set('filename', path)
     .use(nib());
 }
-
-require('./routes')(app, config);
-require('./sockets')(io, config);
-
-app.use(morgan('combined'));
-
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
