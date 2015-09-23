@@ -5,10 +5,9 @@
     .module('app', [])
     .controller('appCtrl', function ($scope, $compile, layout) {
       var vm = this;
-      // var socket = io();
+      vm.socket = io.connect('http://localhost:8080');
 
       vm.emit = function ($event) {
-        // socket.emit('value-change', $event.currentTarget.innerHTML);
         var obj;
 
         // Totally janky and dependant on structure of current template
@@ -34,7 +33,7 @@
           val: $event.target.innerHTML
         };
 
-        console.log(obj);
+        vm.socket.emit('value-change', obj);
       }
 
       vm.renderLayout = function () {

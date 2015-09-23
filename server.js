@@ -23,7 +23,6 @@ require('./sockets')(io, config);
 
 app.use(morgan('combined'));
 
-
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(stylus.middleware({
@@ -31,9 +30,7 @@ app.use(stylus.middleware({
     compile: stylusCompile
 }));
 
-
-
 app.use(serveStatic(__dirname + '/public', {'index': false}));
 
-app.listen(8080);
+server.listen(8080);
 console.log("Listening on port: 8080");
