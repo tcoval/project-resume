@@ -1,29 +1,48 @@
 (function() {
   'use strict';
 
-  function renderLayout($http, id) {
-    id = id || 'default';
-    var container = $('div.margins');
-    $http.get('/template?templateID=' + id).
-      then(function(response) {
-        container.html(response.data);
-      }, function(response) {
-        container.html(response.data);
-      });
-  }
-
   angular
-    .module('app', [])
-    .controller('appCtrl', function ($element, $http) {
+    .module('app')
+    .controller('appCtrl', function ($scope, $compile, layoutService) {
       var vm = this;
+      vm.socket = io.connect('http://localhost:8080');
 
-      vm.socket = io();
+      vm.emit = function ($event) {
+        var obj;
 
-      // TODO remove this (hotfix for testing user Authentication)
-      $http.defaults.headers.common.authToken = '5601ec288624b693c901ca6b'
+        // Totally janky and dependant on structure of current template
+        function closestSection(el, className) {
+          while (el.className !== className) {
+            while (el.previousSibling !== null) {
+              el = el.previousSibling;
+              // console.log('previousSibling:', el)
+              if (el.className === className) {
+                // console.log('found!', el);
+                return el.firstChild.data;
+              }
+            }
 
-      vm.init = function() {
-        renderLayout($http);
+            el = el.parentNode;
+            // console.log('parentNode:', el)
+          }
+        }
+
+        obj = {
+          section: closestSection($event.target, 'section-title'),
+          attr: $event.target.className,
+          val: $event.target.innerHTML
+        };
+
+        vm.socket.emit('value-change', obj);
+      }
+
+      vm.renderLayout = function () {
+        var container = angular.element('div.margins');
+        layoutService.getTemplate()
+          .then(function (data) {
+            container.html(data);
+            $compile(container.contents())($scope);
+          });
       }
     });
 })();
