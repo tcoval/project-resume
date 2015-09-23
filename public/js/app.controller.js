@@ -8,8 +8,33 @@
       // var socket = io();
 
       vm.emit = function ($event) {
-        // socket.emit('update', $event.currentTarget.innerHTML);
-        console.log($event.currentTarget.innerHTML);
+        // socket.emit('value-change', $event.currentTarget.innerHTML);
+        var obj;
+
+        // Totally janky and dependant on structure of current template
+        function closestSection(el, className) {
+          while (el.className !== className) {
+            while (el.previousSibling !== null) {
+              el = el.previousSibling;
+              // console.log('previousSibling:', el)
+              if (el.className === className) {
+                // console.log('found!', el);
+                return el.firstChild.data;
+              }
+            }
+
+            el = el.parentNode;
+            // console.log('parentNode:', el)
+          }
+        }
+
+        obj = {
+          section: closestSection($event.target, 'section-title'),
+          attr: $event.target.className,
+          val: $event.target.innerHTML
+        };
+
+        console.log(obj);
       }
 
       vm.renderLayout = function () {
