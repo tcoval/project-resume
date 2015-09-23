@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-    .module('app', [])
-    .controller('appCtrl', function ($scope, $compile, layout) {
+    .module('app')
+    .controller('appCtrl', function ($scope, $compile, layoutService) {
       var vm = this;
       vm.socket = io.connect('http://localhost:8080');
 
@@ -39,26 +39,11 @@
       vm.renderLayout = function () {
         var container = angular.element('div.margins');
 
-        layout.getTemplate()
+        layoutService.getTemplate()
           .then(function (data) {
             container.html(data);
             $compile(container.contents())($scope);
           });
       }
-    })
-    .factory('layout', function ($http, $log) {
-      return {
-        getTemplate: function (id) {
-          var id = id || 'default';
-
-          return $http.get('/template?id=' + id)
-            .then(function (response) {
-              return response.data;
-            })
-            .catch(function () {
-              $log.error('XHR Failed for getTemplate');
-            });
-        }
-      };
     });
 })();
