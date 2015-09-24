@@ -1,37 +1,36 @@
 link(rel='stylesheet' type='text/css' href='style/template-1.css')
 .header
-  .section-title(style='display:none') Header
-  .name(contentEditable='true' ng-blur='vm.emit($event)') #{baseInfo.name}
+  .name(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.name') #{baseInfo.name}
   .row
-    .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{baseInfo.address.street}
+    .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.address.street') #{baseInfo.address.street}
   .row
-    .left-third(contentEditable='true' ng-blur='vm.emit($event)') #{baseInfo.phone}
-    .right-third(contentEditable='true' ng-blur='vm.emit($event)') #{baseInfo.email}
-    .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{baseInfo.address.cityZip}
+    .left-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.phone') #{baseInfo.phone}
+    .right-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.email') #{baseInfo.email}
+    .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.address.cityZip') #{baseInfo.address.cityZip}
 .education
   .section-title Education
   each edu, i in education
     .entry
       .row
-        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') #{edu.name}
-        .right-third(contentEditable='true' ng-blur='vm.emit($event)') #{edu.dateRange}
-        .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{edu.location}
+        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)' data='education.#{i}.name') #{edu.name}
+        .right-third(contentEditable='true' ng-blur='vm.emit($event)' data='education.#{i}.dateRange') #{edu.dateRange}
+        .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='education.#{i}.location') #{edu.location}
       unless !edu.major
-        .subtitle(contentEditable='true' ng-blur='vm.emit($event)') #{edu.major}
+        .subtitle(contentEditable='true' ng-blur='vm.emit($event)' data='education.#{i}.major') #{edu.major}
       unless !edu.gpa
-      .subtitle(contentEditable='true' ng-blur='vm.emit($event)') #{edu.gpa}
+      .subtitle(contentEditable='true' ng-blur='vm.emit($event)' data='education.#{i}.gpa') #{edu.gpa}
 .employment
   .section-title Employment
   each employ, i in employment
     .entry
       .row
-        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') #{employ.name}
-        .right-third(contentEditable='true' ng-blur='vm.emit($event)') #{employ.dateRange}
-        .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{employ.location}
-      .subtitle(contentEditable='true' ng-blur='vm.emit($event)') #{employ.position}
+        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)' data='employment.#{i}.name') #{employ.name}
+        .right-third(contentEditable='true' ng-blur='vm.emit($event)' data='employment.#{i}.dateRange') #{employ.dateRange}
+        .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='employment.#{i}.location') #{employ.location}
+      .subtitle(contentEditable='true' ng-blur='vm.emit($event)' data='employment.#{i}.position') #{employ.position}
       ul.bullets
-        each note, i in employ.notes
-          li.bullet(contentEditable='true' ng-blur='vm.emit($event)') #{note}
+        each note, j in employ.notes
+          li.bullet(contentEditable='true' ng-blur='vm.emit($event)' data='employment.#{i}.notes.#{j}') #{note}
 .skills
   .section-title Skills
   .entry
@@ -40,34 +39,34 @@ link(rel='stylesheet' type='text/css' href='style/template-1.css')
         when 0
           .row
             .left-third.center
-              span.bold(contentEditable='true' ng-blur='vm.emit($event)') #{skill.skill} #{skill.experience}
+              span.bold(contentEditable='true' ng-blur='vm.emit($event)' data='skills.#{i}') #{skill.skill} #{skill.experience}
         when 1
             .right-third.center
-              span.bold(contentEditable='true' ng-blur='vm.emit($event)') #{skill.skill} #{skill.experience}
+              span.bold(contentEditable='true' ng-blur='vm.emit($event)' data='skills.#{i}') #{skill.skill} #{skill.experience}
         when 2
             .middle-third.center
-              span.bold(contentEditable='true' ng-blur='vm.emit($event)') #{skill.skill} #{skill.experience}
+              span.bold(contentEditable='true' ng-blur='vm.emit($event)' data='skills.#{i}') #{skill.skill} #{skill.experience}
 .projects
   .section-title Projects
   each proj, i in projects
     .entry
       .row
-        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') #{proj.name}
-        .right-third(contentEditable='true' ng-blur='vm.emit($event)') #{proj.dateRange}
-        .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{proj.location}
-      .subtitle(contentEditable='true' ng-blur='vm.emit($event)') #{proj.role}
+        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)' data='projects.#{i}.name') #{proj.name}
+        .right-third(contentEditable='true' ng-blur='vm.emit($event)' data='projects.#{i}.dateRange') #{proj.dateRange}
+        .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='projects.#{i}.location') #{proj.location}
+      .subtitle(contentEditable='true' ng-blur='vm.emit($event)' data='projects.#{i}.role') #{proj.role}
       ul.bullets
-        each note, i in proj.notes
-          li.bullet(contentEditable='true' ng-blur='vm.emit($event)') #{note}
+        each note, j in proj.notes
+          li.bullet(contentEditable='true' ng-blur='vm.emit($event)' data='projects.#{i}.notes.#{j}') #{note}
 .leadership
   .section-title Leadership
   each leader, i in leadership
     .entry
       .row
-        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)') #{leader.name}
-        .right-third(contentEditable='true' ng-blur='vm.emit($event)') #{leader.dateRange}
-        .middle-third(contentEditable='true' ng-blur='vm.emit($event)') #{leader.location}
-      .subtitle(contentEditable='true' ng-blur='vm.emit($event)') #{leader.role}
+        .left-third.title(contentEditable='true' ng-blur='vm.emit($event)' data='leadership.#{i}.name') #{leader.name}
+        .right-third(contentEditable='true' ng-blur='vm.emit($event)' data='leadership.#{i}.dateRange') #{leader.dateRange}
+        .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='leadership.#{i}.location') #{leader.location}
+      .subtitle(contentEditable='true' ng-blur='vm.emit($event)' data='leadership.#{i}.role') #{leader.role}
       ul.bullets
-        each note, i in leader.notes
-          li.bullet(contentEditable='true' ng-blur='vm.emit($event)') #{note}
+        each note, j in leader.notes
+          li.bullet(contentEditable='true' ng-blur='vm.emit($event)' data='leadership.#{i}.notes.#{j}') #{note}
