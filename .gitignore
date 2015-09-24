@@ -1,7 +1,6 @@
 node_modules
 npm-debug.log
 util/database/*?.*
-!util/database/local.[0-9]*
 util/database/journal
 util/database/_tmp
 util/logs/*?.*
