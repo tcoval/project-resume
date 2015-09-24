@@ -1,3 +1,4 @@
+
 var mongoose = require('mongoose'),
     Resume = require('./models/resume')(mongoose),
     config = require('./config');
@@ -6,6 +7,7 @@ mongoose.connect(config.mongoURI);
 
 var tcoval = new Resume(
   {
+    "_id": new mongoose.Types.ObjectId('56032fe92d82e7f12bd78b9f'),
     "baseInfo": {
       "name": "Tanner S. Coval",
       "address": {
@@ -117,21 +119,29 @@ var tcoval = new Resume(
   }
 );
 
-tcoval.validate(function(err) {
-  if(err) console.error(err);
-
-  Resume.findOne().where('baseInfo.name').equals('Tanner S. Coval').exec(function(err, resume) {
-    if(err) console.error(err);
-    if(!resume) {
-      tcoval.save(function(err, tcoval) {
-        //console.log(tcoval._id);
-        if(err) return console.error(err);
-      });
-    }
-    //console.log(resume);
-  });
+Resume.remove({}, function(err, resumes) {
+  console.log(resumes.result.n + " entries removed");
 });
 
-// Resume.find().where('baseInfo.name').equals('Andrew Bangs').remove().exec();
+var resumes = [tcoval];
 
-// process.exit();
+for(var i = 0; i < resumes.length; i++) {
+  var resume = resumes[i];
+  resume.validate(function(err) {
+    if(err) console.error(err);
+
+    Resume.findById(mongoose.Types.ObjectId('56032fe92d82e7f12bd78b9f'), function(err, existingResume) {
+      if(err) console.error(err);
+
+      if(!existingResume) {
+        resume.save(function(err, savedResume) {
+          if(err) return console.error(err);
+          console.log("saved entry: " + JSON.stringify({_id: savedResume._id, name: savedResume.baseInfo.name}));
+        });
+      }
+    });
+  });
+}
+
+
+console.log('\nFinished');
