@@ -29,12 +29,7 @@ module.exports = function(mongoose) {
         notes: [String]
       }
     ],
-    skills: [
-      {
-        skill: String,
-        experience: String
-      }
-    ],
+    skills: [String],
     projects: [
       {
         name: String,

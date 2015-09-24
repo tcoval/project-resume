@@ -72,28 +72,12 @@ var tcoval = new Resume(
       }
     ],
     "skills": [
-      {
-        "skill": "Java",
-        "experience": "(3 years)"
-      },
-      {
-        "skill": "Machine Learning"
-      },
-      {
-        "skill": "HTML, CSS, PHP, SQL",
-        "experience": "(1 year)"
-      },
-      {
-        "skill": "Python",
-        "experience": "(2 years)"
-      },
-      {
-        "skill": "Linux"
-      },
-      {
-        "skill": "Ruby, R, Scala, Javascript",
-        "experience": "(<1 year)"
-      }
+      "Java (3 years)",
+      "Machine Learning",
+      "HTML, CSS, PHP, SQL (1 year)",
+      "Python (2 years)",
+      "Linux",
+      "Ruby, R, Scala, Javascript (<1 year)"
     ],
     "projects": [
       {
@@ -148,6 +132,6 @@ tcoval.validate(function(err) {
   });
 });
 
-//Resume.find().where('baseInfo.name').equals('Tanner S. Coval').remove().exec();
+// Resume.find().where('baseInfo.name').equals('Andrew Bangs').remove().exec();
 
-//process.exit();
+// process.exit();

@@ -5,7 +5,7 @@
     .module('app')
     .factory('layoutService', function ($http, $log) {
 
-      $http.defaults.headers.common['auth-token'] = '56032fe92d82e7f12bd78b9f';
+      $http.defaults.headers.common['auth-token'] = '560445a3b997fb2d8c9d8e83';
 
       return {
         getTemplate: function (id) {
