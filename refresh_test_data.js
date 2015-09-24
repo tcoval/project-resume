@@ -134,30 +134,29 @@ var tcoval = new Resume(
     ]
   }
 );
-
-Resume.remove({}, function(err, resumes) {
-  console.log(resumes.result.n + " entries removed");
-});
-
 var resumes = [tcoval];
 
-for(var i = 0; i < resumes.length; i++) {
-  var resume = resumes[i];
-  resume.validate(function(err) {
-    if(err) console.error(err);
+Resume.remove({}, function(err, removedResumes) {
+  console.log(removedResumes.result.n + " entries removed");
 
-    Resume.findById(mongoose.Types.ObjectId('56032fe92d82e7f12bd78b9f'), function(err, existingResume) {
+  for(var i = 0; i < resumes.length; i++) {
+    var resume = resumes[i];
+    resume.validate(function(err) {
       if(err) console.error(err);
 
-      if(!existingResume) {
-        resume.save(function(err, savedResume) {
-          if(err) return console.error(err);
-          console.log("saved entry: " + JSON.stringify({_id: savedResume._id, name: savedResume.baseInfo.name}));
-        });
-      }
+      Resume.findById(mongoose.Types.ObjectId('56032fe92d82e7f12bd78b9f'), function(err, existingResume) {
+        if(err) console.error(err);
+
+        if(!existingResume) {
+          resume.save(function(err, savedResume) {
+            if(err) return console.error(err);
+            console.log("saved entry: " + JSON.stringify({_id: savedResume._id, name: savedResume.baseInfo.name}));
+          });
+        }
+      });
     });
-  });
-}
+  }
+});
 
 console.log('\nFinished');
 
