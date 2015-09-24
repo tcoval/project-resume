@@ -38,14 +38,11 @@ link(rel='stylesheet' type='text/css' href='style/template-1.css')
       case i % 3
         when 0
           .row
-            .left-third.center
-              span.bold(contentEditable='true' ng-blur='vm.emit($event)' data='skills.#{i}') #{skill.skill} #{skill.experience}
+            .left-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='skills.#{i}') #{skill}
         when 1
-            .right-third.center
-              span.bold(contentEditable='true' ng-blur='vm.emit($event)' data='skills.#{i}') #{skill.skill} #{skill.experience}
+            .right-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='skills.#{i}') #{skill}
         when 2
-            .middle-third.center
-              span.bold(contentEditable='true' ng-blur='vm.emit($event)' data='skills.#{i}') #{skill.skill} #{skill.experience}
+            .middle-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='skills.#{i}') #{skill}
 .projects
   .section-title Projects
   each proj, i in projects

@@ -7,7 +7,7 @@
       var vm = this;
       vm.socket = io.connect('http://localhost:8080');
 
-      vm.authToken = '56032fe92d82e7f12bd78b9f';
+      vm.authToken = '560445a3b997fb2d8c9d8e83';
 
       vm.emit = function ($event) {
         var data = {

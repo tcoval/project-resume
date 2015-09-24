@@ -2,6 +2,10 @@ function parsePath(path) {
   return path.split('.')
 }
 
+function isNumeric(num) {
+  return !isNaN(num);
+}
+
 module.exports = function(io, Resume, config) {
 
   io.on('connection', function(socket) {
@@ -16,7 +20,12 @@ module.exports = function(io, Resume, config) {
 
         var base = resume;
         for(var i = 0; i < path.length; i++) base = base[path[i]];
-        base[attr] = val;
+
+        if (isNumeric(attr)) {
+          base.set(parseInt(attr, 10), val);
+        } else {
+          base[attr] = val;
+        }
 
         resume.save(function(err) {
           if(err) console.error(err);
