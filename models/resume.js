@@ -1,6 +1,7 @@
 module.exports = function(mongoose) {
 
   var ResumeSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     baseInfo: {
       name: String,
       address: {
