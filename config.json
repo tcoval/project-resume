@@ -1,5 +1,6 @@
 {
   "defaultTemplate": 1,
+  "defaultUserID": "160445a3b997fb2d8c9d8e38",
   "sessionSecret": "project-resume-secret",
   "mongoURI": "mongodb://localhost/testDB"
 }
