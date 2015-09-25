@@ -1,0 +1,23 @@
+<div class='ng-modal' ng-show='show'>
+  <div class='ng-modal-overlay' ng-click='hideModal()'></div>
+  <div class='ng-modal-dialog' ng-style='dialogStyle'>
+    <div class='ng-modal-close' ng-click='hideModal()'>x</div>
+    <div class='ng-modal-dialog-content'>
+      <form action='/login', method='post'>
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" name="username" autofocus="true">
+        </div>
+        <br>
+        <div>
+          <label for="password">Password:</label>
+          <input type="text" name="password">
+        </div>
+        <br>
+        <div>
+          <input type="submit" value="Submit">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
