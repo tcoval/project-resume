@@ -20,7 +20,7 @@ var express = require('express'),
 
 mongoose.connect(config.mongoURI);
 
-require('./experiments')(mongoose, User, passport, Strategy);
+require('./passport')(mongoose, User, passport, Strategy);
 require('./routes')(app, passport, mongoose, Resume, config);
 require('./sockets')(io, Resume, config);
 
