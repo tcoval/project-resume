@@ -5,10 +5,10 @@
     .module('app')
     .controller('loginCtrl', function () {
       var vm = this;
-      vm.modalShown = false;
+      vm.visible = false;
 
       vm.toggleModal = function () {
-        vm.modalShown = !vm.modalShown;
+        vm.visible = !vm.visible;
       };
     });
 })();

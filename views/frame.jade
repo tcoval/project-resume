@@ -6,14 +6,17 @@ html(lang='en' ng-app='app')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.js')
     link(rel='stylesheet' type='text/css' href='style/frame.css')
     link(rel='stylesheet' type='text/css' href='style/login.css')
+
   body
     div(ng-controller='loginCtrl as vm')
-      button(ng-click='vm.toggleModal()') Login
-      login-modal(show='vm.modalShown')
+      a(class='login-btn' ng-click='vm.toggleModal()') Login
+      login-modal(show='vm.visible')
+
     div(class='paper' ng-controller='appCtrl as vm' ng-init='vm.renderLayout()')
       div(class='margins')
+
     script(src="js/app.module.js")
     script(src="js/app.controller.js")
+    script(src="js/login.directive.js")
     script(src="js/login.controller.js")
     script(src="js/layout.service.js")
-    script(src="js/login.directive.js")

@@ -15,7 +15,7 @@
             scope.show = false;
           }
         },
-        templateUrl: '../partials/login.html'
+        templateUrl: '../templates/login.html'
       }
     });
 })();
