@@ -1,60 +1,9 @@
-
-var mongoose = require('mongoose'),
-    ObjectID = mongoose.Types.ObjectId,
-    User = require('./models/user')(mongoose),
-    Resume = require('./models/resume')(mongoose),
-    config = require('./config');
-
-mongoose.connect(config.mongoURI);
-
-var users = require('./tests/data/users')(ObjectID);
-var resumes = require('./tests/data/resumes')(ObjectID);
-
-var resumes = [];
-resumes.push(require('./tests/data/demo_resume_1')(ObjectID));
-
-
-
-
-User.remove({}, function(err, removedUsers) {
-  console.log(removedUsers.result.n + " users removed");
-});
-
-Resume.remove({}, function(err, removedResumes) {
-  console.log(removedResumes.result.n + " entries removed");
-});
-
-User.create(
+module.exports = function(ObjectID) {
+  return 
   {
-    "_id": new mongoose.Types.ObjectId("560445a3b997fb2d8c9d8e83"),
-    "username": "tcoval",
-    "password": "password123"
-  },
-  function (err, user) {
-    if (err) {
-      console.error(err);
-    } else { 
-      console.log(user._id);
-    }
-  }
-);
-
-Resume.create(
-  JSON.parse(, 'utf8')),
-  function (err, resume) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(resume._id);
-    }
-  }
-);
-
-Resume.create(
-  {
-    "_id": new mongoose.Types.ObjectId('560445a3b997fb2d8c9d8e83'),
+    "_id": ObjectID("160445a3b997fb2d8c9d8e38"),
     "baseInfo": {
-      "name": "Tanner S. Coval",
+      "name": "Default Resume",
       "address": {
         "street": "2107 NE 54th St.",
         "cityZip": "Seattle, WA 98105"
@@ -161,14 +110,5 @@ Resume.create(
         ]
       }
     ]
-  },
-  function (err, resume) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(resume._id);
-    }
   }
-);
-
-console.log('\nFinished');
+}

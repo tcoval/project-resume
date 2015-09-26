@@ -8,7 +8,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     expressSession = require('express-session'),
     mongoose = require('mongoose'),
-    morgan = require('morgan'),
+    captain = require('morgan'),
     serveStatic = require('serve-static'),
     favicon = require('serve-favicon'),
     app = express(),
@@ -20,17 +20,17 @@ var express = require('express'),
 
 mongoose.connect(config.mongoURI);
 
-require('./passport')(mongoose, User, passport, Strategy);
-require('./routes')(app, passport, mongoose, Resume, config);
-require('./sockets')(io, Resume, config);
-
 app.use(morgan('combined'));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressSession({ secret: config.sessionSecret, resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+require('./passport')(mongoose, User, passport, Strategy);
+require('./routes')(app, passport, mongoose, Resume, config);
+require('./sockets')(io, Resume, config);
 
 // Automated stylus compiling
 function stylusCompile(str, path) {
