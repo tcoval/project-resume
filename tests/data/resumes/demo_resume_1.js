@@ -1,9 +1,8 @@
 module.exports = function(ObjectID) {
-  return 
-  {
-    "_id": ObjectID("160445a3b997fb2d8c9d8e38"),
+  return {
+    "_id": ObjectID('560445a3b997fb2d8c9d8e83'),
     "baseInfo": {
-      "name": "Default Resume",
+      "name": "Tanner S. Coval",
       "address": {
         "street": "2107 NE 54th St.",
         "cityZip": "Seattle, WA 98105"
