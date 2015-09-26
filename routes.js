@@ -9,11 +9,10 @@ module.exports = function(app, passport, mongoose, Resume, config) {
     res.render('frame');
   });
 
-  app.post('/login', function(req, res) {
+  app.post('/login', function(req, res, next) {
     // TODO may want to redirct with parameter for error rendering
-    passport.authenticate('local', { failureRedirect: '/'}, function(req, res) {
-      res.redirect('/');
-    });
+    console.log("step 1");
+    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/'})(req, res, next);
   });
 
   app.post('/logout', function(req, res) {

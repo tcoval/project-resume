@@ -5,6 +5,9 @@ module.exports = function(mongoose) {
     password: String,
     linkedin_id: String
   });
+  userSchema.methods.validPassword = function(password) {
+    return this.password === password;
+  }
 
   return mongoose.model('User', userSchema);
 }

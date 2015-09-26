@@ -20,7 +20,7 @@ var express = require('express'),
 
 mongoose.connect(config.mongoURI);
 
-app.use(morgan('combined'));
+app.use(captain('combined'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressSession({ secret: config.sessionSecret, resave: false, saveUninitialized: false }));
