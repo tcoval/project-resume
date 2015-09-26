@@ -1,4 +1,3 @@
-
 var mongoose = require('mongoose'),
     ObjectID = mongoose.Types.ObjectId,
     User = require('./models/user')(mongoose),
@@ -7,8 +6,8 @@ var mongoose = require('mongoose'),
 
 mongoose.connect(config.mongoURI);
 
-var users = require('./tests/data/users')(ObjectID);
-var resumes = require('./tests/data/resumes')(ObjectID);
+var users = require('./data/users')(ObjectID);
+var resumes = require('./data/resumes')(ObjectID);
 
 User.remove({}, function(err, removedUsers) {
   console.log(removedUsers.result.n + " users removed");
@@ -37,7 +36,7 @@ Resume.collection.insert(resumes, function(err, savedResumes) {
     var resumeOutput = resumes.map(function(resume) {
       return "Resume: " + resume.baseInfo.name + " was added"
     });
-    console.log(resumeOutput.join('/n'));
+    console.log(resumeOutput.join('\n'));
   }
 });
 

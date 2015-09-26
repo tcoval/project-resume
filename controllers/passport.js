@@ -12,7 +12,6 @@ module.exports = function(mongoose, User, passport, Strategy) {
             if(err) return cb(err);
             if(!user) return cb(null, false);
             if(!user.validPassword(password)) return cb(null, false);
-            console.log('got here');
             return cb(null, { id: user._id });
         });
     }));

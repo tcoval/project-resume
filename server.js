@@ -1,5 +1,5 @@
 var express = require('express'),
-    config = require('./config.json'),
+    config = require('./util/config.json'),
     stylus = require('stylus'),
     nib = require('nib'),
     passport = require('passport'),
@@ -28,15 +28,9 @@ app.use(expressSession({ secret: config.sessionSecret, resave: false, saveUninit
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./passport')(mongoose, User, passport, Strategy);
-require('./routes')(app, passport, mongoose, Resume, config);
-require('./sockets')(io, Resume, config);
-
-// app.use(function (req, res, next) {
-//   console.log("AUTHENTICATED: " + req.isAuthenticated());
-//   res.locals.isAuthenticated = req.isAuthenticated();
-//   next();
-// });
+require('./controllers/passport')(mongoose, User, passport, Strategy);
+require('./controllers/routes')(app, passport, mongoose, Resume, config);
+require('./controllers/sockets')(io, Resume, config);
 
 // Automated stylus compiling
 function stylusCompile(str, path) {
@@ -48,7 +42,8 @@ function stylusCompile(str, path) {
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(stylus.middleware({
-    src: __dirname + '/public/style',
+    src: __dirname + '/views/style',
+    dest: __dirname + '/public/style',
     compile: stylusCompile
 }));
 
