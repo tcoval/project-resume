@@ -1,0 +1,19 @@
+#myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+  .modal-dialog(role='document')
+    .modal-content
+      form(action='/login' method='post')
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#myModalLabel.modal-title Login
+        .modal-body
+          div
+            label(for='username') Username
+            input(type='text', name='username', autofocus='true')
+          br
+          div
+            label(for='password') Password
+            input(type='password', name='password')
+        .modal-footer
+          div
+            input(type='submit', value='Login')
