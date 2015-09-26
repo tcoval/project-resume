@@ -9,7 +9,11 @@ html(lang='en' ng-app='app')
 
   body
     div(ng-controller='loginCtrl as vm')
-      a(class='login-btn' ng-click='vm.toggleModal()') Login
+      if !isLoggedIn
+        a(class='login-btn' ng-click='vm.toggleModal()') Login
+      else
+        form(action='/logout' method='post')
+          input(class='login-btn' type='submit' value='Logout')
       login-modal(show='vm.visible')
 
     div(class='paper' ng-controller='appCtrl as vm' ng-init='vm.renderLayout()')

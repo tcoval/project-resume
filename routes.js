@@ -1,12 +1,14 @@
 function getTemplate(id, defaultTemplate) {
-  if(id === 'default') 
+  if(id === 'default')
     id = defaultTemplate;
   return 'template-' + id;
 }
 
 module.exports = function(app, passport, mongoose, Resume, config) {
   app.get('/', function(req, res) {
-    res.render('frame');
+    var user = { isLoggedIn: req.isAuthenticated() };
+    console.log(user);
+    res.render('frame', user);
   });
 
   app.post('/login', function(req, res, next) {

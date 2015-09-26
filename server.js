@@ -32,6 +32,12 @@ require('./passport')(mongoose, User, passport, Strategy);
 require('./routes')(app, passport, mongoose, Resume, config);
 require('./sockets')(io, Resume, config);
 
+// app.use(function (req, res, next) {
+//   console.log("AUTHENTICATED: " + req.isAuthenticated());
+//   res.locals.isAuthenticated = req.isAuthenticated();
+//   next();
+// });
+
 // Automated stylus compiling
 function stylusCompile(str, path) {
   return stylus(str)
