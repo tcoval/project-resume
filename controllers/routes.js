@@ -6,7 +6,11 @@ function getTemplate(id, defaultTemplate) {
 
 module.exports = function(app, passport, mongoose, Resume, config) {
   app.get('/', function(req, res) {
-    var user = { isLoggedIn: req.isAuthenticated() };
+    var user = {
+      isLoggedIn: req.isAuthenticated(),
+      authToken: req.session.passport && req.session.passport.user // req.session.passport.user if req.session.passport exists
+    };
+
     res.render('frame', user);
   });
 
