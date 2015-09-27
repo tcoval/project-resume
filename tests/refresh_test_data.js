@@ -1,8 +1,8 @@
 var mongoose = require('mongoose'),
     ObjectID = mongoose.Types.ObjectId,
-    User = require('./models/user')(mongoose),
-    Resume = require('./models/resume')(mongoose),
-    config = require('./config');
+    User = require('../models/user')(mongoose),
+    Resume = require('../models/resume')(mongoose),
+    config = require('../util/config');
 
 mongoose.connect(config.mongoURI);
 
