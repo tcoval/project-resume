@@ -16,6 +16,9 @@ html(lang='en' ng-app='app')
     link(rel='stylesheet' type='text/css' href='style/login.css')
     
   body
+    if authToken
+      data#authToken(value='#{authToken}')
+
     div
       if !isLoggedIn
         a.login-btn(type='button', data-toggle='modal', data-target='#signupModal') Signup
@@ -27,7 +30,7 @@ html(lang='en' ng-app='app')
     include ./signup-modal.jade
     include ./login-modal.jade
 
-    div(class='paper' ng-controller='appCtrl as vm' ng-init='vm.renderLayout(#{JSON.stringify(authToken)})')
+    div(class='paper' ng-controller='appCtrl as vm' ng-init='vm.renderLayout()')
       div(class='margins')
 
     script(src="js/app.module.js")

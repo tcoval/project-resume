@@ -6,6 +6,7 @@
     .controller('appCtrl', function ($scope, $compile, layoutService) {
       var vm = this;
       vm.socket = io.connect('http://localhost:8080');
+      vm.authToken = angular.element('#authToken').attr('value');
 
       vm.emit = function ($event) {
         var data = {
@@ -17,11 +18,9 @@
         vm.socket.emit('value-change', data);
       }
 
-      vm.renderLayout = function (authToken) {
-        // authToken passed in on ng-init after signup or login
-        vm.authToken = authToken || '';
-
+      vm.renderLayout = function () {
         var container = angular.element('div.margins');
+
         layoutService.getTemplate()
           .then(function (data) {
             container.html(data);
