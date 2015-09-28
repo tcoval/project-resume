@@ -20,7 +20,7 @@ module.exports = function(app, passport, mongoose, Resume, config) {
 
   app.post('/login', function(req, res, next) {
     // TODO may want to redirct with parameter for error rendering
-    passport.authenticate('local-login', { successRedirect: '/', failureRedirect: '/'})(req, res, next);
+    passport.authenticate('local-login', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
   });
 
   app.post('/logout', function(req, res) {
