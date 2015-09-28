@@ -16,7 +16,7 @@ module.exports = function(mongoose) {
     sections: [
       {
         title: String,
-        type: String,
+        layout: String,
         entries: [
           {
             title: String,

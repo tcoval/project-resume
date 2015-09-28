@@ -10,7 +10,7 @@ script(src='./js/templates/template-1.js')
     .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.address.cityZip') #{baseInfo.address.cityZip}
 each section, secIndex in sections
   .section.sortableSection
-    case section.type
+    case section['layout']
       when 'standard'
         .section-title(contentEditable='true' data='section.#{secNum}.title') #{section.title}
         ul.entries
@@ -27,15 +27,15 @@ each section, secIndex in sections
                   li.bullet(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.#{noteIndex}') #{note}
       when 'columns'
         .section-title(contentEditable='true' data='section.#{secNum}.title') #{section.title}
-            each entry, entryIndex in section.entries
-              .entry
-                case entry.notes.length
-                  when 1
-                    .middle-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.0') #{entry.notes[0]}
-                  when 2
-                    .left-half.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.0') #{entry.notes[0]}
-                    .right-half.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.1') #{entry.notes[1]}
-                  when 3
-                    .left-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.0') #{entry.notes[0]}
-                    .right-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.1') #{entry.notes[1]}
-                    .middle-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.2') #{entry.notes[2]}
+        each entry, entryIndex in section.entries
+          .entry
+            case entry.notes.length
+              when 1
+                .middle-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.0') #{entry.notes[0]}
+              when 2
+                .left-half.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.0') #{entry.notes[0]}
+                .right-half.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.1') #{entry.notes[1]}
+              when 3
+                .left-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.0') #{entry.notes[0]}
+                .right-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.1') #{entry.notes[1]}
+                .middle-third.center(contentEditable='true' ng-blur='vm.emit($event)' data='sections.#{secIndex}.entries.#{entryIndex}.notes.2') #{entry.notes[2]}

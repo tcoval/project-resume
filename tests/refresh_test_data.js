@@ -33,6 +33,7 @@ Resume.collection.insert(resumes, function(err, savedResumes) {
   if(err) {
     console.error(err);
   } else {
+    console.log(savedResumes.ops[0]);
     var resumeOutput = resumes.map(function(resume) {
       return "Resume: " + resume.baseInfo.name + " was added"
     });
