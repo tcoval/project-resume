@@ -7,8 +7,6 @@
       var vm = this;
       vm.socket = io.connect('http://localhost:8080');
 
-      vm.authToken = '560445a3b997fb2d8c9d8e83';
-
       vm.emit = function ($event) {
         var data = {
           authToken: vm.authToken,
@@ -19,7 +17,10 @@
         vm.socket.emit('value-change', data);
       }
 
-      vm.renderLayout = function () {
+      vm.renderLayout = function (authToken) {
+        // authToken passed in on ng-init after signup or login
+        vm.authToken = authToken || '';
+
         var container = angular.element('div.margins');
         layoutService.getTemplate()
           .then(function (data) {

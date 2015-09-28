@@ -28,7 +28,7 @@ app.use(expressSession({ secret: config.sessionSecret, resave: false, saveUninit
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./controllers/passport')(mongoose, User, passport, Strategy);
+require('./controllers/passport')(mongoose, User, Resume, passport, Strategy);
 require('./controllers/routes')(app, passport, mongoose, Resume, config);
 require('./controllers/sockets')(io, Resume, config);
 

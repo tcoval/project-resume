@@ -15,18 +15,19 @@ html(lang='en' ng-app='app')
     link(rel='stylesheet' type='text/css' href='style/frame.css')
     link(rel='stylesheet' type='text/css' href='style/login.css')
     
-
   body
     div
       if !isLoggedIn
-        a.login-btn(type='button', data-toggle='modal', data-target='#myModal') Login
+        a.login-btn(type='button', data-toggle='modal', data-target='#signupModal') Signup
+        a.login-btn(type='button', data-toggle='modal', data-target='#loginModal') Login
       else
         form(action='/logout' method='post')
           input(class='login-btn' type='submit' value='Logout')
 
+    include ./signup-modal.jade
     include ./login-modal.jade
 
-    div(class='paper' ng-controller='appCtrl as vm' ng-init='vm.renderLayout()')
+    div(class='paper' ng-controller='appCtrl as vm' ng-init='vm.renderLayout(#{JSON.stringify(authToken)})')
       div(class='margins')
 
     script(src="js/app.module.js")

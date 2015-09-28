@@ -1,11 +1,11 @@
-#loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='loginModalLabel')
+#signupModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='signupModalLabel')
   .modal-dialog(role='document')
     .modal-content
-      form(action='/login' method='post')
+      form(action='/signup' method='post')
         .modal-header
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
-          h4#myModalLabel.modal-title Login
+          h4#myModalLabel.modal-title Signup
         .modal-body
           div
             label(for='username') Username
@@ -16,4 +16,4 @@
             input(type='password', name='password')
         .modal-footer
           div
-            input(type='submit', value='Login')
+            input(type='submit', value='Signup')

@@ -6,14 +6,21 @@ function getTemplate(id, defaultTemplate) {
 
 module.exports = function(app, passport, mongoose, Resume, config) {
   app.get('/', function(req, res) {
-    var user = { isLoggedIn: req.isAuthenticated() };
-    console.log(user);
+    var user = {
+      isLoggedIn: req.isAuthenticated(),
+      authToken: req.session.passport && req.session.passport.user // req.session.passport.user if req.session.passport exists
+    };
+
     res.render('frame', user);
+  });
+
+  app.post('/signup', function(req, res, next) {
+    passport.authenticate('local-signup', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
   });
 
   app.post('/login', function(req, res, next) {
     // TODO may want to redirct with parameter for error rendering
-    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/'})(req, res, next);
+    passport.authenticate('local-login', { successRedirect: '/', failureRedirect: '/'})(req, res, next);
   });
 
   app.post('/logout', function(req, res) {
