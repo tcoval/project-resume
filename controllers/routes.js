@@ -31,11 +31,13 @@ module.exports = function(app, passport, mongoose, Resume, config) {
   app.get('/template', function(req, res) {
     var userId = req.user && req.user.id || config.defaultUserID;
 
+    console.log(userId);
     Resume.findById(userId, function(err, resume) {
       if(err) {
         res.status(404).render('error');
         return
       }
+      console.log(resume);
       var template = getTemplate(req.query.templateID, config.defaultTemplate);
       res.render(template, resume, function(err, html) {
         if(err) {
