@@ -9,71 +9,24 @@ module.exports = function(mongoose) {
         cityZip: String
       },
       phone: String,
-      email: String
+      email: String,
+      linkedin: String,
+      website: String
     },
-    education: [
+    sections: [
       {
-        name: String,
-        location: String,
-        dateRange: String,
-        degree: String,
-        major: String,
-        gpa: String
-      }
-    ],
-    employment: [
-      {
-        name: String,
-        location: String,
-        dateRange: String,
-        position: String,
-        notes: [String]
-      }
-    ],
-    skills: [String],
-    projects: [
-      {
-        name: String,
-        role: String,
-        location: String,
-        dateRange: String,
-        notes: [String]
-      }
-    ],
-    leadership: [
-      {
-        name: String,
-        location: String,
-        dateRange: String,
-        role: String,
-        notes: [String]
-      }
-    ],
-    volunteering: [
-      {
-        name: String,
-        location: String,
-        dateRange: String,
-        role: String,
-        notes: [String]
-      }
-    ],
-    honors: [
-      {
-        name: String,
-        location: String,
-        dateRange: String,
-        role: String,
-        notes: [String]
-      }
-    ],
-    extraCurrActivities: [
-      {
-        name: String,
-        location: String,
-        dateRange: String,
-        role: String,
-        notes: [String]
+        title: String,
+        type: String,
+        entries: [
+          {
+            title: String,
+            subtitles: [String],
+            location: String,
+            dateRange: String,
+            role: String,
+            notes: [String]
+          }
+        ]
       }
     ]
   });

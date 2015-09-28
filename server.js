@@ -10,13 +10,12 @@ var express = require('express'),
     mongoose = require('mongoose'),
     captain = require('morgan'),
     serveStatic = require('serve-static'),
-    favicon = require('serve-favicon'),
+    favicon = require('serve-favicon'), //TODO currently unused
     app = express(),
     server = require('http').Server(app),
     io = require('socket.io')(server),
     Resume = require('./models/resume')(mongoose);
     User = require('./models/user')(mongoose);
-    //resumeFormat = require('./models/resumeFormat')(mongoose);
 
 mongoose.connect(config.mongoURI);
 
