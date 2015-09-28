@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "mongod --dbpath util/database --fork --logpath util/logs/mongod.log; node server.js",
+    "watch": "mongod --dbpath util/database --fork --logpath util/logs/mongod.log; nodemon server.js",
     "stop": "mongod --dbpath util/database --shutdown",
     "test": "make test"
   },
