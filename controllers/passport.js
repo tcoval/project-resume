@@ -41,8 +41,8 @@ module.exports = function(mongoose, User, Resume, passport, Strategy) {
     function(username, password, cb) {
         getUserByUsername(username, function(err, user) {
             if(err) return cb(err);
-            if(!user) return cb(null, false);
-            if(!user.validPassword(password)) return cb(null, false);
+            if(!user) return cb(null, false, req.flash('loginMessage', 'No user found.'));
+            if(!user.validPassword(password)) return cb(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
             return cb(null, { id: user._id });
         });
     }));
