@@ -59,7 +59,7 @@ module.exports = function(ObjectID) {
               "CSE Undergraduate Teaching Assistant"
             ],
             "notes": [
-              "Lead quiz sections of 20+ students, attended lectuares, and graded assignments / tests."
+              "Lead quiz sections of 20+ students, attended lectures, and graded assignments / tests."
             ]
           },
           {

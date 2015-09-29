@@ -1,26 +1,26 @@
 $(function() {
-  $( ".sortableEducation" ).sortable({
-    tolerance: "pointer",
-    start: function(event, ui) {
-      ui.item.css({
-        'padding': '5px',
-        'box-shadow': '-3px 4px 5px 0px rgba(0,0,0,0.75)'
-      });
-    },
-    stop: function(event, ui) {
-      console.log("stop");
-      console.log(event);
-      console.log(ui);
-    },
+  $('.sortableSections').sortable({
+    axis: 'y',
+    tolerance: 'intersect',
+    handle: '.section-handle',
+    cancel: '.section-title',
     update: function(event, ui) {
       
     }
   });
 
-  $( ".sortableEducation" ).disableSelection();
+  $('.sortableEntries').sortable({
+    axis: 'y',
+    tolerance: 'intersect',
+    handle: '.entry',
+    update: function(event, ui) {
+      
+    }
+  });
 
-  $( ".sortableEmployment" ).sortable({
-  tolerance: "pointer"
-});
-  $( ".sortableEmployment" ).disableSelection();
+  $('.section-handle').hover(function() {
+    $(this).parent().css('border-color', '#000');
+  }, function() {
+    $(this).parent().css('border-color', 'transparent');
+  });
 });
