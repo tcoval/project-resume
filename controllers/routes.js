@@ -8,11 +8,20 @@ module.exports = function(app, passport, mongoose, Resume, config) {
   app.get('/', function(req, res) {
     var user = {
       isLoggedIn: req.isAuthenticated(),
-      authToken: req.session.passport && req.session.passport.user // req.session.passport.user if req.session.passport exists
+      authToken: req.session.passport && req.session.passport.user
     };
 
     res.render('frame', user);
   });
+
+  app.post('/user', function(req, res) {
+    var authToken = req.body.authToken || config.defaultUserID;
+
+    Resume.findById(authToken, function(err, user) {
+      if (err) throw err;
+      res.send(JSON.stringify(user));
+    });
+  })
 
   app.post('/signup', function(req, res, next) {
     passport.authenticate('local-signup', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
@@ -31,17 +40,15 @@ module.exports = function(app, passport, mongoose, Resume, config) {
   app.get('/template', function(req, res) {
     var userId = req.user && req.user.id || config.defaultUserID;
 
-    console.log(userId);
     Resume.findById(userId, function(err, resume) {
       if(err) {
         res.status(404).render('error');
         return
       }
-      console.log(resume);
+
       var template = getTemplate(req.query.templateID, config.defaultTemplate);
       res.render(template, resume, function(err, html) {
         if(err) {
-          console.log(err);
           res.status(404).render('error');
         } else {
           res.send(html);

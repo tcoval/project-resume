@@ -21,7 +21,7 @@ mongoose.connect(config.mongoURI);
 
 app.use(captain('combined'));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser());
 app.use(expressSession({ secret: config.sessionSecret, resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());

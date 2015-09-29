@@ -1,13 +1,13 @@
 link(rel='stylesheet' type='text/css' href='style/template-1.css')
 script(src='./js/templates/template-1.js')
 .header
-  .name(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.name') #{baseInfo.name}
+  .name(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.name') {{vm.resume.baseInfo.name}}
   .row
-    .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.address.street') #{baseInfo.address.street}
+    .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.address.street') {{vm.resume.baseInfo.address.street}}
   .row
-    .left-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.phone') #{baseInfo.phone}
-    .right-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.email') #{baseInfo.email}
-    .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.address.cityZip') #{baseInfo.address.cityZip}
+    .left-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.phone') {{vm.resume.baseInfo.phone}}
+    .right-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.email') {{vm.resume.baseInfo.email}}
+    .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.address.cityZip') {{vm.resume.baseInfo.address.cityZip}}
 each section, secIndex in sections
   .section.sortableSection
     case section['layout']
