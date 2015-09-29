@@ -15,7 +15,8 @@ module.exports = function(app, passport, mongoose, Resume, config) {
   });
 
   app.post('/user', function(req, res) {
-    var authToken = req.body.authToken || config.defaultUserID;
+    // var authToken = req.body.authToken || config.defaultUserID;
+    var authToken = req.body.authToken === 'undefined' ? config.defaultUserID : req.body.authToken;
 
     Resume.findById(authToken, function(err, user) {
       if (err) throw err;
@@ -27,9 +28,17 @@ module.exports = function(app, passport, mongoose, Resume, config) {
     passport.authenticate('local-signup', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
   });
 
+  // app.post('/login', function(req, res, next) {
+  //   // TODO may want to redirct with parameter for error rendering
+  //   passport.authenticate('local-login', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
+  // });
+
   app.post('/login', function(req, res, next) {
-    // TODO may want to redirct with parameter for error rendering
-    passport.authenticate('local-login', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
+    passport.authenticate('local-login', function (err, user) {
+      req.logIn(user, function () {
+        res.status(err ? 500 : 200).send(err ? err : user);
+      });
+    })(req, res, next);
   });
 
   app.post('/logout', function(req, res) {

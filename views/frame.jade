@@ -16,24 +16,21 @@ html(lang='en' ng-app='app')
     link(rel='stylesheet' type='text/css' href='style/login.css')
     
   body
-    if authToken
-      data#authToken(value='#{authToken}')
-
-    div
-      if !isLoggedIn
-        a.login-btn(type='button', data-toggle='modal', data-target='#signupModal') Signup
-        a.login-btn(type='button', data-toggle='modal', data-target='#loginModal') Login
-      else
-        form(action='/logout' method='post')
+    data#authToken(value='#{authToken}')
+    div(ng-controller='appCtrl as vm' ng-init='vm.renderLayout()')
+      div
+        a.login-btn(ng-if='vm.authToken === "undefined"', type='button', data-toggle='modal', data-target='#signupModal') Signup
+        a.login-btn(ng-if='vm.authToken === "undefined"', type='button', data-toggle='modal', data-target='#loginModal') Login
+        form(ng-if='vm.authToken !== "undefined"', action='/logout' method='post')
           input(class='login-btn' type='submit' value='Logout')
+        include ./signup-modal.jade
+        include ./login-modal.jade
 
-    include ./signup-modal.jade
-    include ./login-modal.jade
-
-    div(class='paper' ng-controller='appCtrl as vm' ng-init='vm.renderLayout()')
-      div(class='margins')
+      div(class='paper')
+        div(class='margins')
 
     script(src="js/app.module.js")
     script(src="js/app.controller.js")
+    script(src="js/auth.service.js")
     script(src="js/user.service.js")
     script(src="js/layout.service.js")
