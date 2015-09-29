@@ -17,17 +17,17 @@ html(lang='en' ng-app='app')
     
   body
     data#authToken(value='#{authToken}')
-    div(ng-controller='appCtrl as vm' ng-init='vm.renderLayout()')
+    div.ng-cloak(ng-controller='appCtrl as vm' ng-init='vm.renderLayout()')
       div
-        a.login-btn(ng-if='vm.authToken === "undefined"', type='button', data-toggle='modal', data-target='#signupModal') Signup
-        a.login-btn(ng-if='vm.authToken === "undefined"', type='button', data-toggle='modal', data-target='#loginModal') Login
-        form(ng-if='vm.authToken !== "undefined"', action='/logout' method='post')
+        a.login-btn(ng-show='vm.authToken === "undefined"', type='button', data-toggle='modal', data-target='#signupModal') Signup
+        a.login-btn(ng-show='vm.authToken === "undefined"', type='button', data-toggle='modal', data-target='#loginModal') Login
+        form(ng-show='vm.authToken !== "undefined"', name='form', ng-submit='vm.logOut()', role='form')
           input(class='login-btn' type='submit' value='Logout')
         include ./signup-modal.jade
         include ./login-modal.jade
 
-      div(class='paper')
-        div(class='margins')
+      div.ng-cloak(class='paper')
+        div.ng-cloak(class='margins')
 
     script(src="js/app.module.js")
     script(src="js/app.controller.js")

@@ -11,6 +11,7 @@
       vm.emit = emit;
       vm.renderLayout = renderLayout;
       vm.logIn = logIn;
+      vm.logOut = logOut;
 
       vm.getResumeData(vm.authToken);
 
@@ -46,6 +47,17 @@
           .then(function (data) {
             vm.authToken = data.id;
             angular.element('#authToken').attr('value', data.id);
+            vm.getResumeData(vm.authToken);
+            vm.renderLayout();
+          });
+      }
+
+      function logOut() {
+        authService.logOut()
+          .then(function () {
+            // TODO: use reference to defaultUserID in util/config.js instead of str 'undefined'
+            vm.authToken = 'undefined';
+            angular.element('#authToken').attr('value', 'undefined');
             vm.getResumeData(vm.authToken);
             vm.renderLayout();
           });
