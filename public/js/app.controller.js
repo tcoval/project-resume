@@ -55,9 +55,9 @@
       function logOut() {
         authService.logOut()
           .then(function () {
-            // TODO: use reference to defaultUserID in util/config.js instead of str 'undefined'
-            vm.authToken = 'undefined';
-            angular.element('#authToken').attr('value', 'undefined');
+            // TODO: use reference to defaultUserID in util/config.js
+            vm.authToken = '160445a3b997fb2d8c9d8e38';
+            angular.element('#authToken').attr('value', '160445a3b997fb2d8c9d8e38');
             vm.getResumeData(vm.authToken);
             vm.renderLayout();
           });

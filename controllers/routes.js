@@ -8,17 +8,14 @@ module.exports = function(app, passport, mongoose, Resume, config) {
   app.get('/', function(req, res) {
     var user = {
       isLoggedIn: req.isAuthenticated(),
-      authToken: req.session.passport && req.session.passport.user
+      authToken: req.session.passport && req.session.passport.user || config.defaultUserID
     };
 
     res.render('frame', user);
   });
 
   app.post('/user', function(req, res) {
-    // var authToken = req.body.authToken || config.defaultUserID;
-    var authToken = req.body.authToken === 'undefined' ? config.defaultUserID : req.body.authToken;
-
-    Resume.findById(authToken, function(err, user) {
+    Resume.findById(req.body.authToken, function(err, user) {
       if (err) throw err;
       res.send(JSON.stringify(user));
     });

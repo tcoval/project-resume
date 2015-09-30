@@ -11,7 +11,7 @@ module.exports = function(io, Resume, config) {
   io.on('connection', function(socket) {
 
     socket.on('value-change', function(data) {
-      if (!data.authToken) return;
+      if (!data.authToken || data.authToken === config.defaultUserID) return;
 
       var authToken = data.authToken,
           path = parsePath(data.path),
