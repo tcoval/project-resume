@@ -25,15 +25,15 @@ module.exports = function(app, passport, mongoose, Resume, config) {
     passport.authenticate('local-signup', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
   });
 
-  // app.post('/login', function(req, res, next) {
-  //   // TODO may want to redirct with parameter for error rendering
-  //   passport.authenticate('local-login', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
-  // });
-
   app.post('/login', function(req, res, next) {
-    passport.authenticate('local-login', function (err, user) {
-      req.logIn(user, function () {
-        res.status(err ? 500 : 200).send(err ? err : user);
+    passport.authenticate('local-login', function (err, user, info) {
+      if (err) return next(err);
+      if (!user) {
+        return res.status(500).send({message: info.message});
+      }
+      req.logIn(user, function(err) {
+        if (err) return next(err);
+        return res.status(200).send(user);
       });
     })(req, res, next);
   });

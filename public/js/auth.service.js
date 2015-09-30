@@ -16,11 +16,11 @@
         };
 
         return $http.post('/login', data)
-          .then(function (response) {
+          .then(function successCallback(response) {
             return response.data;
-          })
-          .catch(function () {
+          }, function errorCallback(response) {
             $log.error('XHR Failed for logIn');
+            return response.data;
           });
       }
 

@@ -7,6 +7,7 @@
       var vm = this;
       vm.socket = io.connect('http://localhost:8080');
       vm.authToken = angular.element('#authToken').attr('value');
+      vm.loginError = '';
       vm.getResumeData = getResumeData;
       vm.emit = emit;
       vm.renderLayout = renderLayout;
@@ -45,10 +46,18 @@
       function logIn() {
         authService.logIn(vm.username, vm.password)
           .then(function (data) {
-            vm.authToken = data.id;
-            angular.element('#authToken').attr('value', data.id);
-            vm.getResumeData(vm.authToken);
-            vm.renderLayout();
+            if (data.message) {
+              vm.loginError = data.message
+            } else {
+              angular.element('#authToken').attr('value', data.id);
+              vm.authToken = data.id;
+              vm.getResumeData(vm.authToken);
+              vm.renderLayout();
+              vm.loginError = ''
+              vm.username = '';
+              vm.password = '';
+              angular.element('#loginModal').modal('hide');
+            }
           });
       }
 
@@ -56,8 +65,8 @@
         authService.logOut()
           .then(function () {
             // TODO: use reference to defaultUserID in util/config.js
-            vm.authToken = '160445a3b997fb2d8c9d8e38';
             angular.element('#authToken').attr('value', '160445a3b997fb2d8c9d8e38');
+            vm.authToken = '160445a3b997fb2d8c9d8e38';
             vm.getResumeData(vm.authToken);
             vm.renderLayout();
           });

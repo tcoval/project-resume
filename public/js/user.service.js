@@ -13,6 +13,7 @@
               return response.data;
             })
             .catch(function () {
+              //TODO set main template to be error and set user data to be {}
               $log.error('XHR Failed for getResumeData');
             });
         }

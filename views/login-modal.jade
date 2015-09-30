@@ -9,11 +9,12 @@
         .modal-body
           div
             label(for='username') Username
-            input(type='text', name='username', ng-model='vm.username')
+            input(type='text', name='username', ng-model='vm.username', required)
           br
           div
             label(for='password') Password
-            input(type='password', name='password', ng-model='vm.password')
+            input(type='password', name='password', ng-model='vm.password', required)
+          p(ng-hide='vm.loginError === ""') {{vm.loginError}}
         .modal-footer
           div
             input(type='submit', value='Login')
