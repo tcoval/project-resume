@@ -13,6 +13,7 @@
       vm.renderLayout = renderLayout;
       vm.logIn = logIn;
       vm.logOut = logOut;
+      vm.signup = signup;
 
       vm.getResumeData(vm.authToken);
 
@@ -40,6 +41,24 @@
           .then(function (data) {
             container.html(data);
             $compile(container.contents())($scope);
+          });
+      }
+
+      function signup() {
+        authService.signup(vm.suUsername, vm.suPassword)
+          .then(function (data) {
+            if (data.message) {
+              vm.signupError = data.message;
+            } else {
+              angular.element('#authToken').attr('value', data._id);
+              vm.authToken = data._id;
+              vm.getResumeData(vm.authToken);
+              vm.renderLayout();
+              vm.loginError = ''
+              vm.suUsername = '';
+              vm.suPassword = '';
+              angular.element('#signupModal').modal('hide');
+            }
           });
       }
 

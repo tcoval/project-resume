@@ -5,9 +5,25 @@
     .module('app')
     .factory('authService', function ($http, $log) {
       return {
+        signup: signup,
         logIn: logIn,
         logOut: logOut
       };
+
+      function signup(username, password) {
+        var data = {
+          username: username,
+          password: password
+        };
+
+        return $http.post('/signup', data)
+          .then(function successCallback(response) {
+            return response.data;
+          }, function errorCallback(response) {
+            $log.error('XHR Failed for signup');
+            return response.data;
+          });
+      }
 
       function logIn(username, password) {
         var data = {

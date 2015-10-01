@@ -12,7 +12,7 @@ module.exports = function(mongoose, User, Resume, passport, Strategy) {
         getUserByUsername(username, function(err, user) {
           if (err) return cb(err);
           if (user) {
-            return cb(null, false, req.flash('signupMessage', 'That username is already taken.'));
+            return cb(null, false, {message: 'That username is already taken.'});
           } else {
             var newUser = new User();
             var _id = mongoose.Types.ObjectId();

@@ -1,7 +1,7 @@
 #signupModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='signupModalLabel')
   .modal-dialog(role='document')
     .modal-content
-      form(action='/signup' method='post')
+      form(name='form', ng-submit='vm.signup()', role='form')
         .modal-header
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
@@ -9,11 +9,12 @@
         .modal-body
           div
             label(for='username') Username
-            input(type='text', name='username')
+            input(type='text', name='username', ng-model='vm.suUsername', required)
           br
           div
             label(for='password') Password
-            input(type='password', name='password')
+            input(type='password', name='password', ng-model='vm.suPassword', required)
+            p(ng-hide='vm.signupError === ""') {{vm.signupError}}
         .modal-footer
           div
             input(type='submit', value='Signup')

@@ -8,7 +8,8 @@ module.exports = function(app, passport, mongoose, Resume, config) {
   app.get('/', function(req, res) {
     var user = {
       isLoggedIn: req.isAuthenticated(),
-      authToken: req.session.passport && req.session.passport.user || config.defaultUserID
+      authToken: req.session.passport && req.session.passport.user || config.defaultUserID,
+      defaultUserID: config.defaultUserID
     };
 
     res.render('frame', user);
@@ -22,7 +23,16 @@ module.exports = function(app, passport, mongoose, Resume, config) {
   })
 
   app.post('/signup', function(req, res, next) {
-    passport.authenticate('local-signup', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
+    passport.authenticate('local-signup', function (err, user, info) {
+      if (err) return next(err);
+      if (!user) {
+        return res.status(500).send({message: info.message});
+      }
+      req.logIn(user, function(err) {
+        if (err) return next(err);
+        return res.status(200).send(user);
+      });
+    })(req, res, next);
   });
 
   app.post('/login', function(req, res, next) {
