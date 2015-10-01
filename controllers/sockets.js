@@ -6,7 +6,7 @@ function isNumeric(num) {
   return !isNaN(num);
 }
 
-module.exports = function(io, Resume, config) {
+module.exports = function(io, User, Resume, config) {
 
   io.on('connection', function(socket) {
     socket.on('username', function(data) {

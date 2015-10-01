@@ -11,6 +11,7 @@ module.exports = function(mongoose, User, Resume, passport, Strategy) {
       process.nextTick(function () {
         getUserByUsername(username, function(err, user) {
           if (err) return cb(err);
+
           if (user) {
             return cb(null, false, {message: 'That username is already taken.'});
           } else {
@@ -20,7 +21,7 @@ module.exports = function(mongoose, User, Resume, passport, Strategy) {
 
             newUser._id = _id;
             newUser.username = username;
-            newUser.password = password;
+            newUser.password = newUser.generateHash(password);
 
             defaultResume._id = _id;
 

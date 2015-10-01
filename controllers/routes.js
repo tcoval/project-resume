@@ -4,7 +4,7 @@ function getTemplate(id, defaultTemplate) {
   return 'template-' + id;
 }
 
-module.exports = function(app, passport, mongoose, Resume, config) {
+module.exports = function(app, mongoose, User, Resume, passport, config) {
   app.get('/', function(req, res) {
     var user = {
       isLoggedIn: req.isAuthenticated(),
