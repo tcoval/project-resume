@@ -19,8 +19,8 @@ html(lang='en' ng-app='app')
     data#authToken(value='#{authToken}')
     div.ng-cloak(ng-controller='appCtrl as vm' ng-init='vm.init()')
       div
-        a.login-btn(ng-show='vm.authToken === "#{defaultUserID}"', type='button', data-toggle='modal', data-target='#signupModal') Signup
-        a.login-btn(ng-show='vm.authToken === "#{defaultUserID}"', type='button', data-toggle='modal', data-target='#loginModal') Login
+        a.login-btn(ng-show='vm.authToken === "#{defaultUserID}"', type='button', data-toggle='modal', data-target='#suModal') Signup
+        a.login-btn(ng-show='vm.authToken === "#{defaultUserID}"', type='button', data-toggle='modal', data-target='#liModal') Login
         form(ng-show='vm.authToken !== "#{defaultUserID}"', name='form', ng-submit='vm.logout()', role='form')
           input(class='login-btn' type='submit' value='Logout')
         include ./signup-modal.jade

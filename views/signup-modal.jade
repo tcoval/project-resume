@@ -1,11 +1,11 @@
-#signupModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='signupModalLabel')
+#suModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='signupModalLabel', ng-blur='vm.suClear()')
   .modal-dialog(role='document')
     .modal-content
-      form(name='form', ng-submit='vm.signup()', role='form')
+      form(novalidate, name='suForm', ng-submit='vm.signup()')
         .modal-header
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
-          h4#myModalLabel.modal-title Signup
+          h4#suModalLabel.modal-title Signup
         .modal-body
           div
             label(for='username') Username
@@ -14,8 +14,8 @@
           br
           div
             label(for='password') Password
-            input(type='password', name='password', ng-model='vm.suPassword', required)
+            input#suPassword(type='password', name='password', ng-model='vm.suPassword', ng-minlength='6', ng-keyup='vm.suTooltip($event)', required, data-toggle='tooltip', data-placement='right', trigger='focus', title='must be at least 6 characters')
             p(ng-hide='vm.suError === ""') {{vm.suError}}
         .modal-footer
           div
-            input(type='submit', value='Signup')
+            input(type='submit', value='Signup', ng-disabled='suForm.$invalid')
