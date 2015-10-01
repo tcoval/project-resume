@@ -15,6 +15,12 @@ input[type="submit"]
   color #fff
   cursor pointer
 
+#suUsername:focus
+  outline-color green
+
+#suUsername.unavailable:focus
+  outline-color red
+
 @media screen and (min-width:700px) {
   input[type="text"], input[type="password"] {
     min-width 200px

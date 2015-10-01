@@ -6,12 +6,14 @@
     .controller('appCtrl', function ($scope, $compile, authService, layoutService, userService) {
       var vm = this;
       var socket = io.connect('http://localhost:8080');
+      var suUsernameInput = angular.element('#suUsername');
 
       vm.authToken = angular.element('#authToken').attr('value');
       vm.resume;
 
       vm.suUsername;
       vm.suPassword;
+      // vm.suSocketMsg = '';
       vm.suError = '';
       vm.liUsername;
       vm.liPassword;
@@ -22,6 +24,7 @@
       vm.signup = signup;
       vm.login = login;
       vm.logout = logout;
+      vm.validateUser = validateUser;
 
       function getResumeData(authToken) {
         userService.getResumeData(authToken)
@@ -39,6 +42,15 @@
             $compile(container.contents())($scope);
           });
       }
+
+      socket.on('username available', function () {
+        suUsernameInput.removeClass('unavailable');
+      })
+
+      socket.on('username unavailable', function (user) {
+        suUsernameInput.addClass('unavailable');
+        // vm.suSocketMsg = user.username + ' is already taken.';
+      })
 
       ////////////
 
@@ -102,6 +114,12 @@
             getResumeData(vm.authToken);
             renderLayout();
           });
+      }
+
+      function validateUser() {
+        var data = {username: vm.suUsername};
+        // vm.suSocketMsg = '';
+        socket.emit('username', data);
       }
     });
 })();

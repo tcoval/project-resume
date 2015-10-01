@@ -9,7 +9,8 @@
         .modal-body
           div
             label(for='username') Username
-            input(type='text', name='username', ng-model='vm.suUsername', required)
+            input#suUsername(type='text', name='username', ng-model='vm.suUsername', ng-change='vm.validateUser()', required, autocomplete='off')
+            // p(ng-hide='vm.suSocketMsg === ""') {{vm.suSocketMsg}}
           br
           div
             label(for='password') Password
