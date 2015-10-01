@@ -21,7 +21,7 @@ html(lang='en' ng-app='app')
       div
         a.login-btn(ng-show='vm.authToken === "#{defaultUserID}"', type='button', data-toggle='modal', data-target='#signupModal') Signup
         a.login-btn(ng-show='vm.authToken === "#{defaultUserID}"', type='button', data-toggle='modal', data-target='#loginModal') Login
-        form(ng-show='vm.authToken !== "#{defaultUserID}"', name='form', ng-submit='vm.logOut()', role='form')
+        form(ng-show='vm.authToken !== "#{defaultUserID}"', name='form', ng-submit='vm.logout()', role='form')
           input(class='login-btn' type='submit' value='Logout')
         include ./signup-modal.jade
         include ./login-modal.jade

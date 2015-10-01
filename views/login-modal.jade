@@ -1,7 +1,7 @@
 #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='loginModalLabel')
   .modal-dialog(role='document')
     .modal-content
-      form(name='form', ng-submit='vm.logIn()', role='form')
+      form(name='form', ng-submit='vm.login()', role='form')
         .modal-header
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
@@ -9,12 +9,12 @@
         .modal-body
           div
             label(for='username') Username
-            input(type='text', name='username', ng-model='vm.username', required)
+            input(type='text', name='username', ng-model='vm.liUsername', required)
           br
           div
             label(for='password') Password
-            input(type='password', name='password', ng-model='vm.password', required)
-          p(ng-hide='vm.loginError === ""') {{vm.loginError}}
+            input(type='password', name='password', ng-model='vm.liPassword', required)
+          p(ng-hide='vm.liError === ""') {{vm.liError}}
         .modal-footer
           div
             input(type='submit', value='Login')

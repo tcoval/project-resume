@@ -6,8 +6,8 @@
     .factory('authService', function ($http, $log) {
       return {
         signup: signup,
-        logIn: logIn,
-        logOut: logOut
+        login: login,
+        logout: logout
       };
 
       function signup(username, password) {
@@ -20,12 +20,12 @@
           .then(function successCallback(response) {
             return response.data;
           }, function errorCallback(response) {
-            $log.error('XHR Failed for signup');
+            $log.error('XHR Failed for authService.signup');
             return response.data;
           });
       }
 
-      function logIn(username, password) {
+      function login(username, password) {
         var data = {
           username: username,
           password: password
@@ -35,15 +35,15 @@
           .then(function successCallback(response) {
             return response.data;
           }, function errorCallback(response) {
-            $log.error('XHR Failed for logIn');
+            $log.error('XHR Failed for authService.login');
             return response.data;
           });
       }
 
-      function logOut() {
+      function logout() {
         return $http.post('/logout')
           .catch(function () {
-            $log.error('XHR Failed for logOut');
+            $log.error('XHR Failed for authService.logout');
           });
       }
     });

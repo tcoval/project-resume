@@ -14,7 +14,7 @@
           div
             label(for='password') Password
             input(type='password', name='password', ng-model='vm.suPassword', required)
-            p(ng-hide='vm.signupError === ""') {{vm.signupError}}
+            p(ng-hide='vm.suError === ""') {{vm.suError}}
         .modal-footer
           div
             input(type='submit', value='Signup')
