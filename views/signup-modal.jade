@@ -1,7 +1,7 @@
-#suModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='signupModalLabel', ng-blur='vm.suClear()')
+#suModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='signupModalLabel', ng-blur='auth.suClear()')
   .modal-dialog(role='document')
     .modal-content
-      form(novalidate, name='suForm', ng-submit='vm.signup()')
+      form(novalidate, name='suForm', ng-submit='auth.signup()')
         .modal-header
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
@@ -9,13 +9,13 @@
         .modal-body
           div
             label(for='username') Username
-            input#suUsername(type='text', name='username', ng-model='vm.suUsername', ng-change='vm.validateUser()', required, autocomplete='off')
-            // p(ng-hide='vm.suSocketMsg === ""') {{vm.suSocketMsg}}
+            input#suUsername(type='text', name='username', ng-model='auth.suUsername', ng-change='auth.validateUser()', required, autocomplete='off')
+            // p(ng-hide='auth.suSocketMsg === ""') {{auth.suSocketMsg}}
           br
           div
             label(for='password') Password
-            input#suPassword(type='password', name='password', ng-model='vm.suPassword', ng-minlength='6', ng-keyup='vm.suTooltip($event)', required, data-toggle='tooltip', data-placement='right', trigger='focus', title='must be at least 6 characters')
-            p(ng-hide='vm.suError === ""') {{vm.suError}}
+            input#suPassword(type='password', name='password', ng-model='auth.suPassword', ng-minlength='6', ng-keyup='auth.suTooltip($event)', required, data-toggle='tooltip', data-placement='right', trigger='focus', title='must be at least 6 characters')
+            p(ng-hide='auth.suError === ""') {{auth.suError}}
         .modal-footer
           div
             input(type='submit', value='Signup', ng-disabled='suForm.$invalid')

@@ -17,15 +17,14 @@ html(lang='en' ng-app='app')
     
   body
     data#authToken(value='#{authToken}')
-    div.ng-cloak(ng-controller='appCtrl as vm' ng-init='vm.init()')
-      div
+    div.ng-cloak(ng-controller='appCtrl as vm' ng-init='vm.init(null, vm.authToken)')
+      div.ng-cloak(ng-controller='authCtrl as auth')
         a.login-btn(ng-show='vm.authToken === "#{defaultUserID}"', type='button', data-toggle='modal', data-target='#suModal') Signup
         a.login-btn(ng-show='vm.authToken === "#{defaultUserID}"', type='button', data-toggle='modal', data-target='#liModal') Login
-        form(ng-show='vm.authToken !== "#{defaultUserID}"', name='form', ng-submit='vm.logout()', role='form')
+        form(ng-show='vm.authToken !== "#{defaultUserID}"', name='form', ng-submit='auth.logout()', role='form')
           input(class='login-btn' type='submit' value='Logout')
         include ./signup-modal.jade
         include ./login-modal.jade
-
       div.ng-cloak.paper(ng-controller='docCtrl as doc')
         div.ng-cloak.margins()
 
@@ -34,6 +33,7 @@ html(lang='en' ng-app='app')
     
     // controllers
     script(src="js/controllers/app.controller.js")
+    script(src="js/controllers/auth.controller.js")
     script(src="js/controllers/doc.controller.js")
     
     // services
