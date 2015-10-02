@@ -26,11 +26,18 @@ html(lang='en' ng-app='app')
         include ./signup-modal.jade
         include ./login-modal.jade
 
-      div.ng-cloak(class='paper')
-        div.ng-cloak(class='margins')
+      div.ng-cloak.paper(ng-controller='docCtrl as doc')
+        div.ng-cloak.margins()
 
+    // modules
     script(src="js/app.module.js")
+    
+    // controllers
     script(src="js/app.controller.js")
+    script(src="js/doc.controller.js")
+    
+    // services
     script(src="js/auth.service.js")
-    script(src="js/user.service.js")
     script(src="js/layout.service.js")
+    script(src="js/user.service.js")
+    script(src="js/socket.service.js")

@@ -3,10 +3,8 @@
 
   angular
     .module('app')
-    .controller('appCtrl', function ($scope, $compile, authService, layoutService, userService) {
+    .controller('appCtrl', function ($compile, $rootScope, $scope, authService, layoutService, userService, socket) {
 
-      /* SOCKET.IO SETUP */
-      var socket = io.connect('http://localhost:8080');
       var suUsername = angular.element('#suUsername');
       socket.on('username available', function () {
         suUsername.removeClass('unavailable');
@@ -16,8 +14,6 @@
         suUsername.addClass('unavailable');
         // vm.suSocketMsg = user.username + ' is already taken.';
       });
-
-      /* TODO: Abstract socket.io stuff away from appCtrl */
 
       var vm = this;
       vm.authToken = angular.element('#authToken').attr('value');
@@ -36,7 +32,6 @@
 
       /* PUBLIC FUNCTIONS EXPOSED TO TEMPLATES */
       vm.init = init;
-      vm.emit = emit;
       vm.signup = signup;
       vm.suClear = suClear;
       vm.suTooltip = suTooltip;
@@ -60,6 +55,7 @@
           .then(function (data) {
             container.html(data);
             $compile(container.contents())($scope);
+            $rootScope.$broadcast('compile');
           });
       }
 
@@ -69,16 +65,6 @@
         renderLayout();
       }
 
-      function emit($event) {
-        var data = {
-          authToken: vm.authToken,
-          path: $event.target.getAttribute('data'),
-          val: $event.target.innerHTML
-        };
-
-        socket.emit('value-change', data);
-      }
-
       function signup() {
         authService.signup(vm.suUsername, vm.suPassword)
           .then(function (data) {
@@ -86,6 +72,7 @@
               vm.suError = data.message;
             } else {
               angular.element('#authToken').attr('value', data._id);
+              $rootScope.$broadcast('auth-token');  // TODO: remove when app.authToken is made available to child ctrls
               vm.authToken = data._id;
               getResumeData(vm.authToken);
               renderLayout();
