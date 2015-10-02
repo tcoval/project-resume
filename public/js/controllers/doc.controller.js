@@ -15,7 +15,6 @@
       function compile() {
         var container = angular.element('div.margins');
         $compile(container.contents())($scope);
-        console.log('compile received');
       }
 
       function setAuthToken() {
