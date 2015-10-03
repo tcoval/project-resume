@@ -62,11 +62,10 @@ module.exports = function(app, mongoose, User, Resume, passport, config) {
         res.status(404).render('error');
         return
       }
-      console.log(resume);
       var template = getTemplate(req.query.templateID, config.defaultTemplate);   //TODO this needs to be fixed / changed
       res.render(template, resume, function(err, html) {
         if(err) {
-          console.log(err);
+          console.error(err);
           res.status(404).render('error');
         } else {
           res.send(html);

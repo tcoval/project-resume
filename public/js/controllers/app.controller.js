@@ -14,7 +14,6 @@
       function updateResumeData(authToken) {
         resumeService.getResumeData(authToken)
           .then(function (data) {
-            console.log(data);
             vm.resume = data;
           });
       }

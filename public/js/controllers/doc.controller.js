@@ -24,13 +24,15 @@
       //////////
 
       function emit($event) {
-        var data = {
-          authToken: vm.authToken,
-          path: $event.target.getAttribute('data'),
-          val: $event.target.innerHTML
-        };
+        if (vm.authToken && vm.authToken !== 'default') {
+          var data = {
+            authToken: vm.authToken,
+            path: $event.target.getAttribute('data'),
+            val: $event.target.innerHTML
+          };
 
-        socket.emit('value-change', data);
+          socket.emit('value-change', data);
+        }
       }
     });
 })();
