@@ -56,7 +56,9 @@ module.exports = function(app, mongoose, User, Resume, passport, config) {
   app.get('/template', function(req, res) {
     var userId = req.user && req.user.id || config.defaultUserID;
 
-    Resume.findById(userId, function(err, resume) {
+    console.log(userId);
+    Resume.findOne({_id: userId}, function(err, resume) {
+      console.log(resume);
       if(err) {
         res.status(404).render('error');
         return
