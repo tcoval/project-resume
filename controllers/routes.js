@@ -6,12 +6,12 @@ function getTemplate(id, defaultTemplate) {
 
 module.exports = function(app, mongoose, User, Resume, passport, config) {
   app.get('/', function(req, res) {
-    var user = {
+    /*var user = {
       isLoggedIn: req.isAuthenticated(),
       authToken: req.session.passport && req.session.passport.user || 'default'
     };
-
-    res.render('frame', user);
+    */
+    res.render('frame');//, user);
   });
 
   app.post('/resume', function(req, res) {
