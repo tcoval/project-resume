@@ -14,7 +14,7 @@ module.exports = function(app, mongoose, User, Resume, passport, config) {
     res.render('frame');//, user);
   });
 
-  app.post('/resume', function(req, res) {
+  /*app.post('/resume', function(req, res) {
     var authToken = req.body.authToken === 'default' ? config.defaultUserID : req.body.authToken;
 
     Resume.findById(authToken, function(err, resume) {
@@ -74,4 +74,5 @@ module.exports = function(app, mongoose, User, Resume, passport, config) {
     });
 
   });
+  */
 };
