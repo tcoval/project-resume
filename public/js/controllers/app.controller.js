@@ -30,7 +30,6 @@
       }
 
       function onAuthTokenChange(event, authToken) {
-        console.log(authToken);
         vm.authToken = authToken;
         updateResumeData(authToken);
         renderLayout();
@@ -40,6 +39,7 @@
 
       function init() {
         var authToken = angular.element('#authToken').attr('value');
+        console.log(authToken);
         $rootScope.$broadcast('auth-token', authToken);
       }
     });

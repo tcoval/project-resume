@@ -4,7 +4,7 @@
   angular
     .module('app')
     .factory('socket', function ($rootScope) {
-      var socket = io.connect('https://localhost:8080');
+      var socket = io.connect();
 
       return {
         on: function (eventName, callback) {
