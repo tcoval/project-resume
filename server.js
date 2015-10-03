@@ -50,5 +50,4 @@ app.use(stylus.middleware({
 
 app.use(serveStatic(__dirname + '/public', {'index': false}));
 
-server.listen(8080);
-console.log("Listening on port: 8080");
+server.listen(process.env.PORT || 8080);
