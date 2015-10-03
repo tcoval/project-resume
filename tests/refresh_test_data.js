@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 mongoose.connect(config.mongoURI);
 
-var users = require('./data/users')(ObjectID);
+var users = [];//require('./data/users')(ObjectID);
 var resumes = require('./data/resumes')(ObjectID);
 
 User.remove({}, function(err, removedUsers) {

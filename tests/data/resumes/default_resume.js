@@ -1,6 +1,6 @@
 module.exports = function(ObjectID) {
   return {
-    "_id": "160445a3b997fb2d8c9d8e38",
+    "_id": ObjectID("160445a3b997fb2d8c9d8e38"),
     "baseInfo": {
       "name": "Default Resume",
       "address": {
