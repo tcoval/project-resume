@@ -18,7 +18,7 @@ var express = require('express'),
     Resume = require('./models/resume')(mongoose),
     User = require('./models/user')(mongoose, bcrypt);
 
-//mongoose.connect(config.mongoURI);
+mongoose.connect(process.env.MONGOLAB_URI || config.mongoURI);
 
 app.use(captain('combined'));
 app.use(cookieParser());
