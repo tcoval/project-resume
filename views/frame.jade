@@ -17,32 +17,31 @@ html(lang='en' ng-app='app')
     link(rel='stylesheet' type='text/css' href='style/login.css')
     
   body
-    if authToken
-      data#authToken(value='#{authToken}')
-    div.top-bar
-      div.page-title PROJECT RESUME
-      div.right-toolbar
-        if !isLoggedIn
-          a.login-btn(type='button', data-toggle='modal', data-target='#signupModal') Signup
-          a.login-btn(type='button', data-toggle='modal', data-target='#loginModal') Login
-        else
-          form(action='/logout' method='post')
-            input(class='login-btn' type='submit' value='Logout')
-      
+    data#authToken(value='#{authToken}')
+    div.ng-cloak(ng-controller='appCtrl as vm' ng-init='vm.init()')
+      div.top-bar
+        div.page-title PROJECT RESUME
+        div.right-toolbar
+          div.ng-cloak(ng-controller='authCtrl as auth')
+            a.login-btn(ng-show='vm.authToken === "default"', type='button', data-toggle='modal', data-target='#suModal') Signup
+            a.login-btn(ng-show='vm.authToken === "default"', type='button', data-toggle='modal', data-target='#liModal') Login
+            form(ng-show='vm.authToken !== "default"', name='form', ng-submit='auth.logout()', role='form')
+              input(class='login-btn' type='submit' value='Logout')
+            include ./signup-modal.jade
+            include ./login-modal.jade
+      div.ng-cloak.paper(ng-controller='docCtrl as doc')
+        div.ng-cloak.margins()
 
-    div.left-toolbar
-
-    include ./signup-modal.jade
-    include ./login-modal.jade
-
-    div.prev-layout
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    div.paper(ng-controller='appCtrl as vm' ng-init='vm.renderLayout()')
-      div.margins
-    div.next-layout
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-
-    script(src="js/app.module.js")
-    script(src="js/app.controller.js")
-    script(src="js/user.service.js")
-    script(src="js/layout.service.js")
+    // modules
+    script(src="js/modules/app.module.js")
+    
+    // controllers
+    script(src="js/controllers/app.controller.js")
+    script(src="js/controllers/auth.controller.js")
+    script(src="js/controllers/doc.controller.js")
+    
+    // services
+    script(src="js/services/auth.service.js")
+    script(src="js/services/layout.service.js")
+    script(src="js/services/resume.service.js")
+    script(src="js/services/socket.service.js")

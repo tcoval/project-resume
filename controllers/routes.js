@@ -4,37 +4,54 @@ function getTemplate(id, defaultTemplate) {
   return 'template-' + id;
 }
 
-module.exports = function(app, passport, mongoose, Resume, config) {
+module.exports = function(app, mongoose, User, Resume, passport, config) {
   app.get('/', function(req, res) {
     var user = {
       isLoggedIn: req.isAuthenticated(),
-      authToken: req.session.passport && req.session.passport.user
+      authToken: req.session.passport && req.session.passport.user || 'default'
     };
 
     res.render('frame', user);
   });
 
-  app.post('/user', function(req, res) {
-    var authToken = req.body.authToken || config.defaultUserID;
+  app.post('/resume', function(req, res) {
+    var authToken = req.body.authToken === 'default' ? config.defaultUserID : req.body.authToken;
 
-    Resume.findById(authToken, function(err, user) {
+    Resume.findById(authToken, function(err, resume) {
       if (err) throw err;
-      res.send(JSON.stringify(user));
+      res.send(JSON.stringify(resume));
     });
-  })
+  });
 
   app.post('/signup', function(req, res, next) {
-    passport.authenticate('local-signup', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
+    passport.authenticate('local-signup', function (err, user, info) {
+      if (err) return next(err);
+      if (!user) {
+        return res.status(500).send({message: info.message});
+      }
+      req.logIn(user, function(err) {
+        if (err) return next(err);
+        return res.status(200).send(user);
+      });
+    })(req, res, next);
   });
 
   app.post('/login', function(req, res, next) {
-    // TODO may want to redirct with parameter for error rendering
-    passport.authenticate('local-login', { successRedirect: '/', failureRedirect: '/', failureFlash: true})(req, res, next);
+    passport.authenticate('local-login', function (err, user, info) {
+      if (err) return next(err);
+      if (!user) {
+        return res.status(500).send({message: info.message});
+      }
+      req.logIn(user, function(err) {
+        if (err) return next(err);
+        return res.status(200).send(user);
+      });
+    })(req, res, next);
   });
 
   app.post('/logout', function(req, res) {
     req.logout();
-    res.redirect('/');
+    res.send()
   });
 
   app.get('/template', function(req, res) {
@@ -45,10 +62,11 @@ module.exports = function(app, passport, mongoose, Resume, config) {
         res.status(404).render('error');
         return
       }
-      
-      var template = getTemplate(req.query.templateID, config.defaultTemplate);
+      console.log(resume);
+      var template = getTemplate(req.query.templateID, config.defaultTemplate);   //TODO this needs to be fixed / changed
       res.render(template, resume, function(err, html) {
         if(err) {
+          console.log(err);
           res.status(404).render('error');
         } else {
           res.send(html);

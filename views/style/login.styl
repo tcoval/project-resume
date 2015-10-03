@@ -15,6 +15,15 @@ input[type="submit"]
   color #fff
   cursor pointer
 
+input[type="submit"]:disabled
+  background #ddd
+
+#suUsername.ng-dirty, #suPassword.ng-dirty
+  outline-color green
+
+#suUsername.unavailable.ng-dirty, #suPassword.ng-invalid
+  outline-color red
+
 @media screen and (min-width:700px) {
   input[type="text"], input[type="password"] {
     min-width 200px

@@ -11,8 +11,9 @@ module.exports = function(mongoose, User, Resume, passport, Strategy) {
       process.nextTick(function () {
         getUserByUsername(username, function(err, user) {
           if (err) return cb(err);
+
           if (user) {
-            return cb(null, false, req.flash('signupMessage', 'That username is already taken.'));
+            return cb(null, false, {message: 'That username is already taken.'});
           } else {
             var newUser = new User();
             var _id = mongoose.Types.ObjectId();
@@ -20,7 +21,7 @@ module.exports = function(mongoose, User, Resume, passport, Strategy) {
 
             newUser._id = _id;
             newUser.username = username;
-            newUser.password = password;
+            newUser.password = newUser.generateHash(password);
 
             defaultResume._id = _id;
 
@@ -30,7 +31,7 @@ module.exports = function(mongoose, User, Resume, passport, Strategy) {
 
             newUser.save(function(err) {
               if (err) throw err;
-              return cb(null, newUser);
+              return cb(null, { id: newUser._id });
             });
           }
         });
@@ -41,8 +42,8 @@ module.exports = function(mongoose, User, Resume, passport, Strategy) {
     function(username, password, cb) {
         getUserByUsername(username, function(err, user) {
             if(err) return cb(err);
-            if(!user) return cb(null, false, req.flash('loginMessage', 'No user found.'));
-            if(!user.validPassword(password)) return cb(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+            if(!user) return cb(null, false, {message: 'No user found.'});
+            if(!user.validPassword(password)) return cb(null, false, {message: 'Oops! Wrong password.'});
             return cb(null, { id: user._id });
         });
     }));

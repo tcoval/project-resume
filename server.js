@@ -10,26 +10,28 @@ var express = require('express'),
     mongoose = require('mongoose'),
     captain = require('morgan'),
     serveStatic = require('serve-static'),
-    favicon = require('serve-favicon'), //TODO currently unused
+    favicon = require('serve-favicon'),
+    bcrypt = require('bcrypt-nodejs'),
     app = express(),
     server = require('http').Server(app),
     io = require('socket.io')(server),
-    Resume = require('./models/resume')(mongoose);
-    User = require('./models/user')(mongoose);
+    Resume = require('./models/resume')(mongoose),
+    User = require('./models/user')(mongoose, bcrypt);
 
 mongoose.connect(config.mongoURI);
 
 app.use(captain('combined'));
 app.use(cookieParser());
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(expressSession({ secret: config.sessionSecret, resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 require('./controllers/passport')(mongoose, User, Resume, passport, Strategy);
-require('./controllers/routes')(app, passport, mongoose, Resume, config);
-require('./controllers/sockets')(io, Resume, config);
+require('./controllers/routes')(app, mongoose, User, Resume, passport, config);
+require('./controllers/sockets')(io, User, Resume, config);
 
 // Automated stylus compiling
 function stylusCompile(str, path) {
