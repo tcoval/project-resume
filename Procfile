@@ -1,1 +1,1 @@
-web: node tests/refresh_test_data.js
+web: node server.js
