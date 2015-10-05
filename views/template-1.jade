@@ -13,7 +13,7 @@ script(src='./js/templates/template-1.js')
 ul.sortableSections
   li.section(ng-switch='vm.resume.sections[$index].layout' ng-repeat='section in vm.resume.sections' ng-init='sectionIndex = $index')
     .section-handle
-      .section-title(contentEditable='true' ng-blur='vm.emit($event)' data='section.{{sectionIndex}}.title') {{vm.resume.sections[sectionIndex].title}}
+      .section-title(contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.title') {{vm.resume.sections[sectionIndex].title}}
 
     ul.sortableEntries(ng-switch-when='standard')
       li.entry(ng-repeat='entry in vm.resume.sections[sectionIndex].entries' ng-init='entryIndex = $index')
