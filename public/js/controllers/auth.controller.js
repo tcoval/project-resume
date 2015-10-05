@@ -3,7 +3,7 @@
 
   angular
     .module('app')
-    .controller('authCtrl', function ($compile, $rootScope, $scope, authService, socket) {
+    .controller('authCtrl', function ($rootScope, $scope, authService, socket) {
       var vm = this;
       var suUsername = angular.element('#suUsername');
 

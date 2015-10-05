@@ -29,8 +29,8 @@ html(lang='en' ng-app='app')
               input(class='login-btn' type='submit' value='Logout')
             include ./signup-modal.jade
             include ./login-modal.jade
-      div.ng-cloak.paper(ng-controller='docCtrl as doc')
-        div.ng-cloak.margins()
+      div.ng-cloak.paper
+        div.ng-cloak.margins
 
     // modules
     script(src="js/modules/app.module.js")
@@ -38,7 +38,6 @@ html(lang='en' ng-app='app')
     // controllers
     script(src="js/controllers/app.controller.js")
     script(src="js/controllers/auth.controller.js")
-    script(src="js/controllers/doc.controller.js")
     
     // services
     script(src="js/services/auth.service.js")
