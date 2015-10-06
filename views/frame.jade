@@ -5,14 +5,9 @@ html(lang='en' ng-app='app')
     title Project Resume
     link(rel='icon' type='image/png' href='img/favicon.png')
     link(rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300|Open+Sans:400,300,700')
-    script(src='https://cdn.socket.io/socket.io-1.3.5.js')
-    script(src='https://code.jquery.com/jquery-1.11.3.min.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js')
-    script(src='js/bootstrap.min.js')
-    script(src='js/jquery-ui.min.js')
     link(rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
-    link(rel='stylesheet' type='text/css' href='style/jquery-ui.min.css')
-    link(rel='stylesheet' type='text/css' href='style/jquery-ui.structure.min.css')
+    link(rel='stylesheet' type='text/css' href='vendor/jquery-ui-custom.min.css')
+    link(rel='stylesheet' type='text/css' href='vendor/jquery-ui.structure.min.css')
     link(rel='stylesheet' type='text/css' href='style/frame.css')
     link(rel='stylesheet' type='text/css' href='style/login.css')
     
@@ -31,6 +26,13 @@ html(lang='en' ng-app='app')
             include ./login-modal.jade
       div.ng-cloak.paper
         div.ng-cloak.margins
+
+    // vendor
+    script(src='https://cdn.socket.io/socket.io-1.3.5.js')
+    script(src='https://code.jquery.com/jquery-1.11.3.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js')
+    script(src='vendor/bootstrap-custom.min.js')
+    script(src='vendor/jquery-ui-custom.min.js')
 
     // modules
     script(src="js/modules/app.module.js")

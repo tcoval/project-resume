@@ -5,6 +5,3 @@ util/database/journal
 util/database/_tmp
 util/logs/*?.*
 public/style/*.css
-!public/style/bootstrap.min.css
-!public/style/jquery-ui.min.css
-!public/style/jquery-ui.structure.min.css
