@@ -2,34 +2,55 @@ link(rel='stylesheet' type='text/css' href='style/template-1.css')
 script(src='./js/templates/template-1.js')
 
 .header
-  .name(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.name' ng-bind-html='vm.resume.baseInfo.name | unescaped')
+  .name(contentEditable='true' ng-blur='vm.emit($event)' 
+    data='baseInfo.name' ng-bind-html='vm.resume.baseInfo.name | unescaped')
   .row
-    .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.address.street' ng-bind-html='vm.resume.baseInfo.address.street | unescaped')
+    .middle-third(contentEditable='true' ng-blur='vm.emit($event)' 
+      data='baseInfo.address.street' ng-bind-html='vm.resume.baseInfo.address.street | unescaped')
   .row
-    .left-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.phone' ng-bind-html='vm.resume.baseInfo.phone | unescaped')
-    .right-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.email' ng-bind-html='vm.resume.baseInfo.email | unescaped')
-    .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='baseInfo.address.cityZip' ng-bind-html='vm.resume.baseInfo.address.cityZip | unescaped')
+    .left-third(contentEditable='true' ng-blur='vm.emit($event)' 
+      data='baseInfo.phone' ng-bind-html='vm.resume.baseInfo.phone | unescaped')
+    .right-third(contentEditable='true' ng-blur='vm.emit($event)' 
+      data='baseInfo.email' ng-bind-html='vm.resume.baseInfo.email | unescaped')
+    .middle-third(contentEditable='true' ng-blur='vm.emit($event)' 
+      data='baseInfo.address.cityZip' ng-bind-html='vm.resume.baseInfo.address.cityZip | unescaped')
     
 ul.sortableSections
-  li.section(ng-switch='vm.resume.sections[$index].layout' ng-repeat='section in vm.resume.sections  track by $index' ng-init='sectionIndex = $index')
+  li.section(ng-switch='vm.resume.sections[$index].layout' 
+    ng-repeat='section in vm.resume.sections track by $index' ng-init='sectionIndex = $index')
     .section-handle
-      .section-title(contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.title' ng-bind-html='vm.resume.sections[sectionIndex].title | unescaped')
+      .section-title(contentEditable='true' ng-blur='vm.emit($event)' 
+        data='sections.{{sectionIndex}}.title' ng-bind-html='vm.resume.sections[sectionIndex].title | unescaped')
 
     ul.sortableEntries(ng-switch-when='standard')
       li.entry(ng-repeat='entry in vm.resume.sections[sectionIndex].entries track by $index' ng-init='entryIndex = $index')
         .row
-          .left-third.title(contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.title' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].title | unescaped')
-          .right-third(contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.dateRange' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].dateRange | unescaped')
-          .middle-third(contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.location' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].location | unescaped')
-        .subtitle(ng-repeat='subtitle in vm.resume.sections[sectionIndex].entries[entryIndex].subtitles track by $index' ng-init='subIndex = $index' contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.subtitles.{{subIndex}}' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].subtitles[subIndex] | unescaped')
+          .left-third.title(contentEditable='true' ng-blur='vm.emit($event)' 
+            data='sections.{{sectionIndex}}.entries.{{entryIndex}}.title' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].title | unescaped')
+          .right-third(contentEditable='true' ng-blur='vm.emit($event)' 
+            data='sections.{{sectionIndex}}.entries.{{entryIndex}}.dateRange' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].dateRange | unescaped')
+          .middle-third(contentEditable='true' ng-blur='vm.emit($event)' 
+            data='sections.{{sectionIndex}}.entries.{{entryIndex}}.location' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].location | unescaped')
+        .subtitle(contentEditable='true' ng-blur='vm.emit($event)'
+          ng-repeat='subtitle in vm.resume.sections[sectionIndex].entries[entryIndex].subtitles track by $index' ng-init='subIndex = $index' 
+          data='sections.{{sectionIndex}}.entries.{{entryIndex}}.subtitles.{{subIndex}}' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].subtitles[subIndex] | unescaped')
         ul.bullets
-          li.bullet(ng-repeat='note in vm.resume.sections[sectionIndex].entries[entryIndex].notes track by $index' ng-init='noteIndex = $index' contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.{{noteIndex}}' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[noteIndex] | unescaped')
+          li.bullet(contentEditable='true' ng-blur='vm.emit($event)' 
+            ng-repeat='note in vm.resume.sections[sectionIndex].entries[entryIndex].notes track by $index' ng-init='noteIndex = $index' 
+            data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.{{noteIndex}}' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[noteIndex] | unescaped')
         .tooltip
 
-    .entry(ng-switch-when='columns' ng-repeat='entry in vm.resume.sections[sectionIndex].entries track by $index' ng-switch='vm.resume.sections[sectionIndex].entries[$index].notes.length' ng-init='entryIndex = $index')
-      .middle-third.center(ng-switch-when='1' contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.0' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[0] | unescaped')
-      .left-half.center(ng-switch-when='2' contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.0' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[0] | unescaped')
-      .left-half.center(ng-switch-when='2' contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.1' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[1] | unescaped')
-      .left-third.center(ng-switch-when='3' contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.0' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[0] | unescaped')
-      .right-third.center(ng-switch-when='3' contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.1' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[1] | unescaped')
-      .middle-third.center(ng-switch-when='3' contentEditable='true' ng-blur='vm.emit($event)' data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.2' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[2] | unescaped')
+    .entry(ng-switch-when='columns' ng-repeat='entry in vm.resume.sections[sectionIndex].entries track by $index' ng-init='entryIndex = $index' 
+      ng-switch='vm.resume.sections[sectionIndex].entries[$index].notes.length')
+      .middle-third.center(ng-switch-when='1' contentEditable='true' ng-blur='vm.emit($event)' 
+        data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.0' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[0] | unescaped')
+      .left-half.center(ng-switch-when='2' contentEditable='true' ng-blur='vm.emit($event)' 
+        data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.0' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[0] | unescaped')
+      .left-half.center(ng-switch-when='2' contentEditable='true' ng-blur='vm.emit($event)' 
+        data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.1' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[1] | unescaped')
+      .left-third.center(ng-switch-when='3' contentEditable='true' ng-blur='vm.emit($event)' 
+        data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.0' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[0] | unescaped')
+      .right-third.center(ng-switch-when='3' contentEditable='true' ng-blur='vm.emit($event)' 
+        data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.1' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[1] | unescaped')
+      .middle-third.center(ng-switch-when='3' contentEditable='true' ng-blur='vm.emit($event)' 
+        data='sections.{{sectionIndex}}.entries.{{entryIndex}}.notes.2' ng-bind-html='vm.resume.sections[sectionIndex].entries[entryIndex].notes[2] | unescaped')
