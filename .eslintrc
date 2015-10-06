@@ -5,3 +5,5 @@ rules:
   angular/controller-name:
     - 2
     - '/[a-z].*Ctrl$/'
+  angular/log:
+    - 0
