@@ -15,7 +15,7 @@ script(src='./js/templates/template-1.js')
     .middle-third(contentEditable='true' ng-blur='vm.emit($event)' 
       data='baseInfo.address.cityZip' ng-bind-html='vm.resume.baseInfo.address.cityZip | unescaped')
     
-ul.sortableSections
+ul.sortableSections(ui-sortable='vm.sortableSections' ng-model='vm.resume.sections' data='sections')
   li.section(ng-switch='vm.resume.sections[$index].layout' 
     ng-repeat='section in vm.resume.sections track by $index' ng-init='sectionIndex = $index')
     .section-handle

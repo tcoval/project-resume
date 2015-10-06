@@ -4,15 +4,37 @@
   angular
     .module('app')
     .controller('appCtrl', function ($compile, $rootScope, $scope, layoutService, resumeService, socket) {
+      var scope = $rootScope;
       var vm = this;
+
+      // VIEWMODEL BINDINGS
       vm.authToken = '';
       vm.resume;
 
       vm.init = init;
       vm.emit = emit;
 
-      $rootScope.$on('auth-token', onAuthTokenChange);
+      // UI.SORTABLE OPTIONS
+      vm.sortableSections = {
+        axis: 'y',
+        tolerance: 'intersect',
+        handle: '.section-handle',
+        cancel: '.section-title',
+        stop: function(event, ui) { // use stop because it is already wrapped with $apply
+          emitSortableUpdate(event);
+        }
+      };
 
+      // EVENT LISTENERS
+      scope.$on('auth-token', onAuthTokenChange);
+
+      function onAuthTokenChange(event, authToken) {
+        vm.authToken = authToken;
+        updateResumeData(authToken);
+        renderLayout();
+      }
+
+      // PRIVATE FUNCTIONS
       function updateResumeData(authToken) {
         resumeService.getResumeData(authToken)
           .then(function (data) {
@@ -27,18 +49,22 @@
           .then(function (data) {
             container.html(data);
             $compile(container.contents())($scope);
-            // $rootScope.$broadcast('compile');
           });
       }
 
-      function onAuthTokenChange(event, authToken) {
-        vm.authToken = authToken;
-        updateResumeData(authToken);
-        renderLayout();
+      function emitSortableUpdate(event) {
+        if (vm.authToken && vm.authToken !== 'default') {
+          var data = {
+            authToken: vm.authToken,
+            path: event.target.getAttribute('data'),
+            val: eval(event.target.getAttribute('ng-model'))  // only difference compared to vm.emit...
+          };
+
+          socket.emit('value-change', data);
+        }
       }
 
-      //////////
-
+      // PUBLIC FUNCTION IMPLEMENTATIONS
       function init() {
         var authToken = angular.element('#authToken').attr('value');
         $rootScope.$broadcast('auth-token', authToken);
