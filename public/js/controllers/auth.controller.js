@@ -3,112 +3,111 @@
 
   angular
     .module('app')
-    .controller('authCtrl', function ($rootScope, $scope, authService, socket) {
-      var vm = this;
-      var suUsername = angular.element('#suUsername');
+    .controller('authCtrl', authCtrl);
 
-      /* LOGIN MODAL */
-      vm.liUsername;
-      vm.liPassword;
-      vm.liError = '';
+  authCtrl.$inject = ['$rootScope', '$scope', 'authService', 'socket'];
 
-      /* SIGNUP MODAL */
-      vm.suUsername;
-      vm.suPassword;
-      vm.suUsernameError = '';
-      vm.suError = '';
+  function authCtrl($rootScope, $scope, authService, socket) {
+    var vm = this;
+    var suUsername = angular.element('#suUsername');
 
-      /* PUBLIC FUNCTIONS EXPOSED TO TEMPLATES */
-      vm.signup = signup;
-      vm.suClear = suClear;
-      vm.suTooltip = suTooltip;
-      vm.liClear = liClear;
-      vm.login = login;
-      vm.logout = logout;
-      vm.validateUser = validateUser;
+    /* VIEWMODEL BINDINGS */
+    vm.suUsername;
+    vm.suPassword;
+    vm.suUsernameError = '';
+    vm.suError = '';
 
-      /* SOCKET.IO LISTENERS FOR SIGNUP VALIDATION */
-      socket.on('username available', function () {
-        suUsername.removeClass('unavailable');
-      });
+    vm.liUsername;
+    vm.liPassword;
+    vm.liError = '';
 
-      socket.on('username unavailable', function (user) {
-        suUsername.addClass('unavailable');
-        // vm.suSocketMsg = user.username + ' is already taken.';
-      });
+    vm.signup = signup;
+    vm.login = login;
+    vm.logout = logout;
+    vm.suTooltip = suTooltip;
+    vm.validateUser = validateUser;
 
-      /* PUBLIC FUNCTION IMPLEMENTATIONS */
-      function signup() {
-        authService.signup(vm.suUsername, vm.suPassword)
-          .then(function (data) {
-            if (data.message) {
-              vm.suError = data.message;
-            } else {
-              updateAuthToken(data.id);
-              cleanupModal('#suModal');
-            }
-          });
-      }
-
-      function login() {
-        authService.login(vm.liUsername, vm.liPassword)
-          .then(function (data) {
-            if (data.message) {
-              vm.liError = data.message
-            } else {
-              updateAuthToken(data.id);
-              cleanupModal('#liModal');
-            }
-          });
-      }
-
-      function logout() {
-        authService.logout()
-          .then(function () {
-            angular.element('#authToken').attr('value', 'default');
-            $rootScope.$broadcast('auth-token', 'default');
-          });
-      }
-
-      ////////////////////////
-
-      function updateAuthToken(authToken) {
-        angular.element('#authToken').attr('value', authToken);
-        $rootScope.$broadcast('auth-token', authToken);
-      }
-
-      function cleanupModal(elementID) {
-        angular.element(elementID).modal('hide');
-        liClear();
-        suClear();
-      }
-
-      function suClear() {
-        angular.element('#suPassword').tooltip('hide');
-        vm.suUsername = '';
-        vm.suPassword = '';
-        vm.suError = '';
-      }
-
-      function liClear() {
-        vm.liUsername = '';
-        vm.liPassword = '';
-        vm.liError = '';
-      }
-
-      function suTooltip($event) {
-        // TODO: use reference to ng-minlength instead of hardcoding '6'
-        if ($event.target.value.length < 6) {
-          angular.element($event.target).tooltip('show');
-        } else {
-          angular.element($event.target).tooltip('hide');
-        }
-      }
-
-      function validateUser() {
-        var data = {username: vm.suUsername};
-        // vm.suSocketMsg = '';
-        socket.emit('username', data);
-      }
+    /* EVENT LISTENERS (SOCKET.IO) */
+    socket.on('username available', function () {
+      suUsername.removeClass('unavailable');
     });
+
+    socket.on('username unavailable', function (user) {
+      suUsername.addClass('unavailable');
+      // vm.suSocketMsg = user.username + ' is already taken.';
+    });
+
+    /* PRIVATE FUNCTIONS */
+    function updateAuthToken(authToken) {
+      angular.element('#authToken').attr('value', authToken);
+      $rootScope.$broadcast('auth-token', authToken);
+    }
+
+    function cleanupModal(elementID) {
+      angular.element(elementID).modal('hide');
+      suClear();
+      liClear();
+    }
+
+    function suClear() {
+      angular.element('#suPassword').tooltip('hide');
+      vm.suUsername = '';
+      vm.suPassword = '';
+      vm.suError = '';
+    }
+
+    function liClear() {
+      vm.liUsername = '';
+      vm.liPassword = '';
+      vm.liError = '';
+    }
+
+    /* PUBLIC FUNCTION IMPLEMENTATIONS */
+    function signup() {
+      authService.signup(vm.suUsername, vm.suPassword)
+        .then(function (data) {
+          if (data.message) {
+            vm.suError = data.message;
+          } else {
+            updateAuthToken(data.id);
+            cleanupModal('#suModal');
+          }
+        });
+    }
+
+    function login() {
+      authService.login(vm.liUsername, vm.liPassword)
+        .then(function (data) {
+          if (data.message) {
+            vm.liError = data.message
+          } else {
+            updateAuthToken(data.id);
+            cleanupModal('#liModal');
+          }
+        });
+    }
+
+    function logout() {
+      authService.logout()
+        .then(function () {
+          angular.element('#authToken').attr('value', 'default');
+          $rootScope.$broadcast('auth-token', 'default');
+        });
+    }
+
+    function suTooltip($event) {
+      // TODO: use reference to ng-minlength instead of hardcoding '6'
+      if ($event.target.value.length < 6) {
+        angular.element($event.target).tooltip('show');
+      } else {
+        angular.element($event.target).tooltip('hide');
+      }
+    }
+
+    function validateUser() {
+      var data = {username: vm.suUsername};
+      // vm.suSocketMsg = '';
+      socket.emit('username', data);
+    }
+  }
 })();

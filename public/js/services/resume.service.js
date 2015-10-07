@@ -3,20 +3,27 @@
 
   angular
     .module('app')
-    .factory('resumeService', function ($http, $log) {
-      return {
-        getResumeData: function (authToken) {
-          var data = {authToken: authToken};
+    .factory('resumeService', resumeService);
 
-          return $http.post('/resume', data)
-            .then(function (response) {
-              return response.data;
-            })
-            .catch(function () {
-              //TODO set main template to be error and set user data to be {}
-              $log.error('XHR Failed for getResumeData');
-            });
-        }
-      };
-    });
+  resumeService.$inject = ['$http', '$log'];
+
+  function resumeService($http, $log) {
+    return {
+      getResumeData: getResumeData
+    };
+
+    ////////////
+
+    function getResumeData(authToken) {
+      var data = {authToken: authToken};
+
+      return $http.post('/resume', data)
+        .then(function (response) {
+          return response.data;
+        })
+        .catch(function () {
+          $log.error('XHR Failed for getResumeData');
+        });
+    }
+  }
 })();

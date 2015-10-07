@@ -3,9 +3,13 @@
 
   angular
     .module('app')
-    .filter('unescaped', function ($sce) {
-      return function (val) {
-        return $sce.trustAsHtml(val);
-      };
-    });
+    .filter('unescaped', unescaped);
+
+  unescaped.$inject = ['$sce'];
+
+  function unescaped($sce) {
+    return function (val) {
+      return $sce.trustAsHtml(val);
+    };
+  }
 })();
