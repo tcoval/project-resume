@@ -1,7 +1,10 @@
 node_modules
 npm-debug.log
+
 util/database/*?.*
 util/database/journal
 util/database/_tmp
 util/logs/*?.*
+
 public/style/*.css
+public/js/*.js
