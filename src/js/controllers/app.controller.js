@@ -29,6 +29,22 @@
       }
     };
 
+    /* REMNANT FROM TEMPLATE-1.JS */
+    // $('.sortableEntries').sortable({
+    //   axis: 'y',
+    //   tolerance: 'intersect',
+    //   handle: '.entry',
+    //   update: function(event, ui) {
+    //
+    //   }
+    // });
+    //
+    // $('.section-handle').hover(function() {
+    //   $(this).parent().css('border-color', '#000');
+    // }, function() {
+    //   $(this).parent().css('border-color', 'transparent');
+    // });
+
     /* EVENT LISTENERS (ANGULAR) */
     scope.$on('auth-token', onAuthTokenChange);
     scope.$on('section removed', onSectionRemoved);
