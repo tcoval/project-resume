@@ -25,17 +25,23 @@
       handle: '.section-handle',
       cancel: '.section-title',
       stop: function(event, ui) { // use stop because it is already wrapped with $apply
-        emitSortableUpdate(event);
+        emitSectionUpdate(event);
       }
     };
 
     /* EVENT LISTENERS (ANGULAR) */
     scope.$on('auth-token', onAuthTokenChange);
+    scope.$on('section removed', onSectionRemoved);
 
     function onAuthTokenChange(event, authToken) {
       vm.authToken = authToken;
       updateResumeData(authToken);
       renderLayout();
+    }
+
+    function onSectionRemoved(event, sectionIndex) {
+      vm.resume.sections.splice(sectionIndex, 1);
+      emitSectionUpdate();
     }
 
     /* PRIVATE FUNCTIONS */
@@ -56,12 +62,13 @@
         });
     }
 
-    function emitSortableUpdate(event) {
+    // TODO: Convert to reusable function for entries, subtitles, and notes
+    function emitSectionUpdate() {
       if (vm.authToken && vm.authToken !== 'default') {
         var data = {
           authToken: vm.authToken,
-          path: event.target.getAttribute('data'),
-          val: eval(event.target.getAttribute('ng-model'))  // only difference compared to vm.emit...
+          path: 'sections',
+          val: vm.resume.sections
         };
 
         socket.emit('value-change', data);
