@@ -31,7 +31,7 @@ app.use(passport.session());
 
 require('./controllers/passport')(mongoose, User, Resume, passport, Strategy);
 require('./controllers/routes')(app, mongoose, User, Resume, passport, config);
-require('./controllers/sockets')(io, User, Resume, config);
+require('./controllers/sockets')(io, mongoose, User, Resume, config);
 
 // Automated stylus compiling
 function stylusCompile(str, path) {

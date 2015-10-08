@@ -6,7 +6,7 @@ function isNumeric(num) {
   return !isNaN(num);
 }
 
-module.exports = function(io, User, Resume, config) {
+module.exports = function(io, mongoose, User, Resume, config) {
 
   io.on('connection', function(socket) {
     socket.on('username', function(data) {
@@ -22,7 +22,6 @@ module.exports = function(io, User, Resume, config) {
         }
       })
     });
-
 
     socket.on('value-change', function(data) {
       if (!data.authToken || data.authToken === config.defaultUserID) return;
@@ -44,6 +43,52 @@ module.exports = function(io, User, Resume, config) {
         } else {
           base[attr] = val;
         }
+
+        resume.save(function(err) {
+          if (err) console.error(err);
+        });
+      });
+    });
+
+    socket.on('add-section', function(data) {
+      if (!data.authToken || data.authToken === config.defaultUserID) return;
+
+      var authToken = data.authToken,
+          newSection = data.newSection,
+          sectionIndex = data.sectionIndex;
+
+      Resume.findById(authToken, function(err, resume) {
+        resume.sections.splice(sectionIndex, 0, newSection);
+
+        resume.save(function(err) {
+          if (err) console.error(err);
+        });
+      });
+    });
+
+    socket.on('remove-section', function(data) {
+      if (!data.authToken || data.authToken === config.defaultUserID) return;
+
+      var authToken = data.authToken,
+          sectionIndex = data.sectionIndex;
+
+      Resume.findById(authToken, function(err, resume) {
+        resume.sections.splice(sectionIndex, 1);
+
+        resume.save(function(err) {
+          if (err) console.error(err);
+        });
+      });
+    });
+
+    socket.on('sortable-event', function(data) {
+      if (!data.authToken || data.authToken === config.defaultUserID) return;
+
+      var authToken = data.authToken,
+          sections = data.sections;
+
+      Resume.findById(authToken, function(err, resume) {
+        resume.sections = sections;
 
         resume.save(function(err) {
           if (err) console.error(err);

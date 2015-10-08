@@ -25,11 +25,11 @@
       handle: '.section-handle',
       cancel: '.section-title',
       stop: function(event, ui) { // use stop because it is already wrapped with $apply
-        emitSectionUpdate(event);
+        emitSortableUpdate();
       }
     };
 
-    /* REMNANT FROM TEMPLATE-1.JS */
+    // TODO: convert to angular-ui sortable when sections implementation is finished
     // $('.sortableEntries').sortable({
     //   axis: 'y',
     //   tolerance: 'intersect',
@@ -47,6 +47,7 @@
 
     /* EVENT LISTENERS (ANGULAR) */
     scope.$on('auth-token', onAuthTokenChange);
+    scope.$on('section added', onSectionAdded);
     scope.$on('section removed', onSectionRemoved);
 
     function onAuthTokenChange(event, authToken) {
@@ -55,9 +56,16 @@
       renderLayout();
     }
 
+    function onSectionAdded(event, sectionIndex) {
+      var newSection = angular.extend({}, vm.resume.sections[sectionIndex]);
+      
+      vm.resume.sections.splice(sectionIndex, 0, newSection);
+      emitAddSection(newSection, sectionIndex);
+    }
+
     function onSectionRemoved(event, sectionIndex) {
       vm.resume.sections.splice(sectionIndex, 1);
-      emitSectionUpdate();
+      emitRemoveSection(sectionIndex);
     }
 
     /* PRIVATE FUNCTIONS */
@@ -78,16 +86,38 @@
         });
     }
 
-    // TODO: Convert to reusable function for entries, subtitles, and notes
-    function emitSectionUpdate() {
+    function emitAddSection(newSection, sectionIndex) {
       if (vm.authToken && vm.authToken !== 'default') {
         var data = {
           authToken: vm.authToken,
-          path: 'sections',
-          val: vm.resume.sections
+          newSection: newSection,
+          sectionIndex: sectionIndex
         };
 
-        socket.emit('value-change', data);
+        socket.emit('add-section', data);
+      }
+    }
+
+    function emitRemoveSection(sectionIndex) {
+      if (vm.authToken && vm.authToken !== 'default') {
+        var data = {
+          authToken: vm.authToken,
+          sectionIndex: sectionIndex
+        };
+
+        socket.emit('remove-section', data);
+      }
+    }
+
+    // TODO: fix bugs that occur when sorting sections that have been edited
+    function emitSortableUpdate() {
+      if (vm.authToken && vm.authToken !== 'default') {
+        var data = {
+          authToken: vm.authToken,
+          sections: vm.resume.sections
+        };
+
+        socket.emit('sortable-event', data);
       }
     }
 

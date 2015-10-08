@@ -19,6 +19,7 @@ ul.sortableSections(ui-sortable='vm.sortableSections' ng-model='vm.resume.sectio
     ng-repeat='section in vm.resume.sections track by $index' ng-init='sectionIndex = $index')
     .section-handle
       pr-remove(style='display:none; position:absolute; right:0' ng-click='remove($event, sectionIndex)')
+      pr-add(style='display:none; position:absolute; right:20px' ng-click='add($event, sectionIndex)')
       .section-title(contentEditable='true' ng-blur='vm.emit($event)'
         data='sections.{{sectionIndex}}.title' ng-bind-html='vm.resume.sections[sectionIndex].title | unescaped')
 
