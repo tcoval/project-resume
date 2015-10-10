@@ -7,6 +7,7 @@
   "scripts": {
     "start": "mongod --dbpath util/database --fork --logpath util/logs/mongod.log; node server.js",
     "watch": "mongod --dbpath util/database --fork --logpath util/logs/mongod.log; nodemon server.js",
+    "postinstall": "gulp js",
     "stop": "mongod --dbpath util/database --shutdown",
     "test": "make test"
   },
@@ -31,6 +32,10 @@
     "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.1",
     "html-pdf": "^1.4.0",
     "jade": "^1.11.0",
     "mocha": "^2.3.2",
@@ -48,10 +53,6 @@
   },
   "devDependencies": {
     "eslint": "^1.5.0",
-    "eslint-plugin-angular": "^0.12.0",
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.4.1"
+    "eslint-plugin-angular": "^0.12.0"
   }
 }

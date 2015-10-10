@@ -7,3 +7,4 @@ util/database/_tmp
 util/logs/*?.*
 
 public/style/*.css
+public/js/*.js
