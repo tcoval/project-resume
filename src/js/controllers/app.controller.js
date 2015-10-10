@@ -130,11 +130,7 @@
         base = base[path[i]];
       }
 
-      if (!isNaN(attr)) {
-        base.set(parseInt(attr, 10), val);
-      } else {
-        base[attr] = val;
-      }
+      base[attr] = val;
     }
 
     /* PUBLIC FUNCTION IMPLEMENTATIONS */
