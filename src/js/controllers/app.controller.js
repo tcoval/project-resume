@@ -58,7 +58,7 @@
 
     function onSectionAdded(event, sectionIndex) {
       var newSection = angular.extend({}, vm.resume.sections[sectionIndex]);
-      
+
       vm.resume.sections.splice(sectionIndex, 0, newSection);
       emitAddSection(newSection, sectionIndex);
     }
@@ -109,7 +109,6 @@
       }
     }
 
-    // TODO: fix bugs that occur when sorting sections that have been edited
     function emitSortableUpdate() {
       if (vm.authToken && vm.authToken !== 'default') {
         var data = {
@@ -118,6 +117,23 @@
         };
 
         socket.emit('sortable-event', data);
+      }
+    }
+
+    function updateVm(data) {
+      var base = vm.resume;
+      var path = data.path.split('.');
+      var attr = path.pop();
+      var val = data.val;
+
+      for (var i = 0, len = path.length; i < len; i++) {
+        base = base[path[i]];
+      }
+
+      if (!isNaN(attr)) {
+        base.set(parseInt(attr, 10), val);
+      } else {
+        base[attr] = val;
       }
     }
 
@@ -135,6 +151,7 @@
           val: $event.target.innerHTML
         };
 
+        updateVm(data);
         socket.emit('value-change', data);
       }
     }
