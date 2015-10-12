@@ -57,7 +57,7 @@
     }
 
     function onSectionAdded(event, sectionIndex) {
-      var newSection = angular.extend({}, vm.resume.sections[sectionIndex]);
+      var newSection = angular.copy(vm.resume.sections[sectionIndex], {});
 
       vm.resume.sections.splice(sectionIndex, 0, newSection);
       emitAddSection(newSection, sectionIndex);
